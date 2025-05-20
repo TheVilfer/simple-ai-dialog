@@ -25,7 +25,7 @@ const ThemeContext = createContext<ThemeContextType>(initialState);
 export function ThemeProvider({
   children,
   defaultTheme = "system",
-  storageKey = "testovor-theme",
+  storageKey = "simple-ai-dialog-theme",
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(defaultTheme);

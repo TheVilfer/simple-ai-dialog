@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Testovor App",
-  description: "A modern Next.js application with authentication",
+  title: "Simple AI Dialog",
+  description: "A modern AI chat application with custom authentication",
 };
 
 export default async function RootLayout({
@@ -36,7 +36,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider defaultTheme="system" storageKey="testovor-theme">
+        <ThemeProvider defaultTheme="system" storageKey="simple-ai-dialog-theme">
           <NextIntlClientProvider locale={locale} messages={messages}>
             <QueryProvider>
               <AuthProvider>
