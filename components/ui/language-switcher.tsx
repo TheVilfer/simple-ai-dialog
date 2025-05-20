@@ -24,7 +24,7 @@ export function LanguageSwitcher() {
 
   // Avoid hydration mismatch
   if (!mounted) {
-    return <Button variant="ghost" className="w-16 opacity-0" />;
+    return <Button variant="ghost" className="h-8 w-14 sm:h-9 sm:w-16 opacity-0" />;
   }
 
   const switchLocale = (locale: string) => {
@@ -39,18 +39,18 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-1 sm:space-x-2">
       <Button
         variant={currentLocale === "en" ? "default" : "ghost"}
         onClick={() => switchLocale("en")}
-        className="w-12"
+        className="h-8 sm:h-9 w-10 sm:w-12 text-xs sm:text-sm"
       >
         EN
       </Button>
       <Button
         variant={currentLocale === "ru" ? "default" : "ghost"}
         onClick={() => switchLocale("ru")}
-        className="w-12"
+        className="h-8 sm:h-9 w-10 sm:w-12 text-xs sm:text-sm"
       >
         RU
       </Button>
@@ -78,7 +78,7 @@ export function LanguageSwitcherSimple() {
 
   // Avoid hydration mismatch
   if (!mounted) {
-    return <Button variant="ghost" className="w-16 opacity-0" />;
+    return <Button variant="ghost" className="h-8 w-12 sm:h-9 sm:w-16 opacity-0" />;
   }
 
   const toggleLocale = () => {
@@ -100,7 +100,7 @@ export function LanguageSwitcherSimple() {
     <Button
       variant="ghost"
       onClick={toggleLocale}
-      className="px-3"
+      className="h-8 sm:h-9 px-2 sm:px-3 text-xs sm:text-sm"
       title={t("language")}
     >
       {currentLocale.toUpperCase()}

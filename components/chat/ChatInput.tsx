@@ -2,10 +2,16 @@
 
 import { useState, FormEvent, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { SendIcon } from "lucide-react";
+import { SendIcon, CornerDownLeftIcon, HelpCircle } from "lucide-react";
 import { useChat } from "@/hooks/useChat";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface ChatInputProps {
   placeholder?: string;
@@ -19,6 +25,7 @@ export function ChatInput({
   className
 }: ChatInputProps) {
   const [message, setMessage] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
   const { addMessage, simulateAiResponse, isLoading } = useChat();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const t = useTranslations("chat");
@@ -65,36 +72,65 @@ export function ChatInput({
   return (
     <form 
       onSubmit={handleSubmit}
-      className={`flex items-end gap-2 border-t p-3 sm:p-4 mx-auto max-w-3xl w-full ${className || ''}`}
+      className={`flex flex-col gap-1 border-t p-2 sm:p-4 w-full ${className || ''}`}
     >
-      <div className="relative flex-1 overflow-hidden">
-        <textarea
-          ref={textareaRef}
-          placeholder={placeholder || defaultPlaceholder}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={handleKeyPress}
-          className="flex w-full resize-none rounded-md border border-input bg-background px-3 py-2 text-sm min-h-[44px] max-h-[150px] ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-          disabled={isLoading}
-          rows={1}
-          aria-label={t("typeMessage")}
-        />
+      <div className="flex justify-between items-center text-[10px] text-muted-foreground px-2">
+        <div className="flex items-center">
+          {isFocused && (
+            <div className="flex items-center">
+              <CornerDownLeftIcon className="h-3 w-3 mr-1" />
+              <span>{t("sendTip")}</span>
+            </div>
+          )}
+        </div>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="flex items-center cursor-help">
+                <HelpCircle className="h-3 w-3 mr-1" />
+                <span>{t("markdownSupported")}</span>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent side="top" className="max-w-xs">
+              <p className="text-xs">
+                <strong>**Bold**</strong>, <em>*Italic*</em>, <code>`Code`</code>, ```Code blocks```, - Lists, # Headings, and more.
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
-      
-      <Button 
-        type="submit" 
-        size="icon"
-        className="h-10 w-10 rounded-full flex-shrink-0"
-        disabled={!message.trim() || isLoading}
-        aria-label={t("sendMessage")}
-        title={t("sendMessage")}
-      >
-        {isLoading ? (
-          <Skeleton className="h-5 w-5 rounded-full" />
-        ) : (
-          <SendIcon className="h-5 w-5" />
-        )}
-      </Button>
+      <div className="flex items-end gap-1 sm:gap-2">
+        <div className="relative flex-1 overflow-hidden">
+          <textarea
+            ref={textareaRef}
+            placeholder={placeholder || defaultPlaceholder}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={handleKeyPress}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            className="flex w-full resize-none rounded-md border border-input bg-background px-2 sm:px-3 py-2 text-xs sm:text-sm min-h-[40px] sm:min-h-[44px] max-h-[120px] sm:max-h-[150px] ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            disabled={isLoading}
+            rows={1}
+            aria-label={t("typeMessage")}
+          />
+        </div>
+        
+        <Button 
+          type="submit" 
+          size="icon"
+          className="h-9 w-9 sm:h-10 sm:w-10 rounded-full flex-shrink-0"
+          disabled={!message.trim() || isLoading}
+          aria-label={t("sendMessage")}
+          title={t("sendMessage")}
+        >
+          {isLoading ? (
+            <Skeleton className="h-4 w-4 sm:h-5 sm:w-5 rounded-full" />
+          ) : (
+            <SendIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+          )}
+        </Button>
+      </div>
     </form>
   );
 } 

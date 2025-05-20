@@ -15,19 +15,19 @@ export function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return <Button variant="ghost" size="icon" className="w-9 h-9 opacity-0" />;
+    return <Button variant="ghost" size="icon" className="w-8 h-8 sm:w-9 sm:h-9 opacity-0" />;
   }
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-1 sm:space-x-2">
       <Button
         variant={theme === "light" ? "default" : "ghost"}
         size="icon"
         onClick={() => setTheme("light")}
         title="Light Mode"
-        className="w-9 h-9"
+        className="w-8 h-8 sm:w-9 sm:h-9"
       >
-        <Sun className="h-4 w-4" />
+        <Sun className="h-3 w-3 sm:h-4 sm:w-4" />
         <span className="sr-only">Light Mode</span>
       </Button>
 
@@ -36,9 +36,9 @@ export function ThemeToggle() {
         size="icon"
         onClick={() => setTheme("dark")}
         title="Dark Mode"
-        className="w-9 h-9"
+        className="w-8 h-8 sm:w-9 sm:h-9"
       >
-        <Moon className="h-4 w-4" />
+        <Moon className="h-3 w-3 sm:h-4 sm:w-4" />
         <span className="sr-only">Dark Mode</span>
       </Button>
 
@@ -47,9 +47,9 @@ export function ThemeToggle() {
         size="icon"
         onClick={() => setTheme("system")}
         title="System Theme"
-        className="w-9 h-9"
+        className="w-8 h-8 sm:w-9 sm:h-9"
       >
-        <Laptop className="h-4 w-4" />
+        <Laptop className="h-3 w-3 sm:h-4 sm:w-4" />
         <span className="sr-only">System Theme</span>
       </Button>
     </div>
@@ -66,7 +66,7 @@ export function ThemeToggleSimple() {
   }, []);
 
   if (!mounted) {
-    return <Button variant="ghost" size="icon" className="w-9 h-9 opacity-0" />;
+    return <Button variant="ghost" size="icon" className="w-8 h-8 sm:w-9 sm:h-9 opacity-0" />;
   }
 
   // Determine which icon to show based on the current theme
@@ -89,10 +89,10 @@ export function ThemeToggleSimple() {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      className="w-9 h-9"
+      className="w-8 h-8 sm:w-9 sm:h-9"
       title={`Current: ${theme} theme. Click to toggle.`}
     >
-      <Icon className="h-4 w-4" />
+      <Icon className="h-3 w-3 sm:h-4 sm:w-4" />
       <span className="sr-only">Toggle theme</span>
     </Button>
   );

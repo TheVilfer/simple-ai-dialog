@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { QueryProvider } from "@/lib/providers/query-provider";
 import { AuthProvider } from "@/lib/providers/auth-provider";
 import { ThemeProvider } from "@/lib/providers/theme-provider";
+import { ToastProvider } from "@/components/ui/toast-provider";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import "./globals.css";
@@ -41,6 +42,7 @@ export default async function RootLayout({
             <QueryProvider>
               <AuthProvider>
                 {children}
+                <ToastProvider />
               </AuthProvider>
             </QueryProvider>
           </NextIntlClientProvider>

@@ -18,7 +18,11 @@
     "theme": "Theme",
     "light": "Light",
     "dark": "Dark",
-    "system": "System"
+    "system": "System",
+    "confirmLogout": "Are you sure you want to log out?",
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel"
   },
   "auth": {
     "loginTitle": "Login to your account",
@@ -33,7 +37,9 @@
     "passwordsDoNotMatch": "Passwords do not match",
     "invalidEmail": "Please enter a valid email address",
     "loginError": "Login error, please try again",
-    "registerError": "Registration error, please try again"
+    "registerError": "Registration error, please try again",
+    "loginSuccess": "Login successful! Redirecting...",
+    "registerSuccess": "Registration successful! Redirecting..."
   },
   "profile": {
     "myProfile": "My Profile",
@@ -41,13 +47,19 @@
     "registrationDate": "Registration Date",
     "subscriptions": "Subscriptions",
     "noSubscriptions": "You have no active subscriptions",
-    "loadingProfile": "Loading profile data..."
+    "loadingProfile": "Loading profile data...",
+    "confirmLogout": "Are you sure you want to log out?"
   },
   "chat": {
     "sendMessage": "Send message",
     "typeMessage": "Type your message here...",
     "empty": "No messages yet",
     "waitingResponse": "Waiting for response...",
-    "startChatInstructions": "Send a message to start chatting. Try asking \"Show me a markdown example\"."
+    "startChatInstructions": "Send a message to start chatting. Try asking \"Show me a markdown example\".",
+    "sendTip": "Press Enter to send, Shift+Enter for new line",
+    "clearChatConfirm": "Are you sure you want to clear the conversation?",
+    "messageCopied": "Message copied to clipboard",
+    "markdownSupported": "Markdown formatting supported",
+    "copyMessage": "Copy message"
   }
 } 
