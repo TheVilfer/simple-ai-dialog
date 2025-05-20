@@ -43,31 +43,23 @@ Simple AI Dialog is a modern, feature-rich chat application built with Next.js. 
 ### Prerequisites
 
 - Node.js 18.x or later
-- npm, yarn, or pnpm
+- pnpm 8.x or later
 
 ### Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/simple-ai-dialog.git
+   git clone https://github.com/TheVilfer/simple-ai-dialog
    cd simple-ai-dialog
    ```
 
 2. Install dependencies:
    ```bash
-   npm install
-   # or
-   yarn install
-   # or
    pnpm install
    ```
 
 3. Run the development server:
    ```bash
-   npm run dev
-   # or
-   yarn dev
-   # or
    pnpm dev
    ```
 
