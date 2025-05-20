@@ -5,9 +5,21 @@ import { useAuth } from "@/hooks/useAuth";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 import { MessageSquare } from "lucide-react";
+import { ThemeToggleSimple } from "@/components/ui/theme-toggle";
 
 export default function ProfileInfo() {
   const { profile, isLoadingProfile, profileError, user, logout } = useAuth();
+
+  // Function to decode URL-encoded email
+  const decodeEmail = (email: string | undefined) => {
+    if (!email) return '';
+    try {
+      return decodeURIComponent(email);
+    } catch (e) {
+      console.error("Error decoding email:", e);
+      return email; // Return original if decoding fails
+    }
+  };
 
   if (isLoadingProfile) {
     return (
@@ -33,7 +45,8 @@ export default function ProfileInfo() {
     <div className="space-y-8">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold tracking-tight">Мой профиль</h1>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
+          <ThemeToggleSimple />
           <Link href="/chat" className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 h-9 px-4 py-2 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground">
             <MessageSquare className="h-4 w-4 mr-2" />
             <span>Чат</span>
@@ -49,7 +62,7 @@ export default function ProfileInfo() {
           <div className="space-y-4">
             <div>
               <p className="text-muted-foreground text-sm">Email</p>
-              <p className="font-medium">{profile?.email || user?.email}</p>
+              <p className="font-medium">{decodeEmail(profile?.email || user?.email)}</p>
             </div>
             
             <div>

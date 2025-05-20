@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,7 +10,32 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSearchParams } from "next/navigation";
 
-export default function RegisterForm() {
+// Create a loading fallback
+const RegisterFormSkeleton = () => (
+  <div className="grid gap-6">
+    <div className="grid gap-4">
+      <div className="grid gap-2">
+        <Skeleton className="h-4 w-12" />
+        <Skeleton className="h-10 w-full" />
+      </div>
+      <div className="grid gap-2">
+        <Skeleton className="h-4 w-12" />
+        <Skeleton className="h-10 w-full" />
+      </div>
+      <div className="grid gap-2">
+        <Skeleton className="h-4 w-40" />
+        <Skeleton className="h-10 w-full" />
+      </div>
+      <Skeleton className="h-10 w-full" />
+    </div>
+    <div className="text-center">
+      <Skeleton className="h-4 w-40 mx-auto" />
+    </div>
+  </div>
+);
+
+// Separate component that uses useSearchParams
+function RegisterFormWithParams() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -142,5 +167,14 @@ export default function RegisterForm() {
         </Link>
       </div>
     </div>
+  );
+}
+
+// Main component with suspense
+export default function RegisterForm() {
+  return (
+    <Suspense fallback={<RegisterFormSkeleton />}>
+      <RegisterFormWithParams />
+    </Suspense>
   );
 } 

@@ -8,6 +8,7 @@ import { PlusIcon, ArrowLeftIcon } from "lucide-react";
 import { useChat } from "@/hooks/useChat";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import Link from "next/link";
+import { ThemeToggleSimple } from "@/components/ui/theme-toggle";
 
 export default function ChatClient() {
   const { clearMessages } = useChat();
@@ -31,14 +32,17 @@ export default function ChatClient() {
             </Link>
             <h1 className="text-xl font-bold">Чат</h1>
           </div>
-          <Button 
-            variant="outline" 
-            size="icon" 
-            onClick={() => clearMessages()}
-            title="Новый чат"
-          >
-            <PlusIcon className="h-4 w-4" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <ThemeToggleSimple />
+            <Button 
+              variant="outline" 
+              size="icon" 
+              onClick={() => clearMessages()}
+              title="Новый чат"
+            >
+              <PlusIcon className="h-4 w-4" />
+            </Button>
+          </div>
         </header>
         
         <div className="flex flex-1 flex-col overflow-hidden relative">

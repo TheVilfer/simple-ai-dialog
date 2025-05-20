@@ -59,8 +59,9 @@ export async function POST(request: Request) {
     const response = NextResponse.json(responseData, { status: 201 });
     
     // Set cookies for authentication with the predefined options
+    // Ensure email is not URL-encoded when stored in the cookie
     response.cookies.set(AUTH_COOKIE_NAME, token, cookieOptions);
-    response.cookies.set(USER_COOKIE_NAME, body.email, cookieOptions);
+    response.cookies.set(USER_COOKIE_NAME, decodeURIComponent(body.email), cookieOptions);
     
     // Log the cookie operation
     console.log("[API] Setting auth cookies with options:", {

@@ -56,7 +56,8 @@ export const getUserFromRequest = (request: Request): User | null => {
     if (cookieHeader) {
       const parsedCookies = parseCookies(cookieHeader);
       if (parsedCookies[USER_COOKIE_NAME]) {
-        email = parsedCookies[USER_COOKIE_NAME];
+        // Make sure to decode the email from the cookie
+        email = decodeURIComponent(parsedCookies[USER_COOKIE_NAME]);
       }
     }
     
@@ -83,7 +84,11 @@ export const getUserFromServerCookies = async (): Promise<User | null> => {
       return null;
     }
     
-    const email = cookiesList.get(USER_COOKIE_NAME)?.value || 'user@example.com';
+    let email = cookiesList.get(USER_COOKIE_NAME)?.value || 'user@example.com';
+    // Make sure to decode the email
+    if (email) {
+      email = decodeURIComponent(email);
+    }
     
     return {
       email,

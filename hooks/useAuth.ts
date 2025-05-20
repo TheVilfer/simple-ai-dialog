@@ -47,9 +47,9 @@ export const useAuth = () => {
           const data = await res.json();
           console.log("[Auth] Successfully fetched user profile:", data);
           
-          // We're authenticated, set the user state
+          // We're authenticated, set the user state with decoded email
           setUser({
-            email: data.email,
+            email: decodeURIComponent(data.email),
             // We don't have access to the actual token since it's httpOnly,
             // but we can set a placeholder value
             token: "http-only-token"  
@@ -71,7 +71,8 @@ export const useAuth = () => {
   // the HttpOnly cookies are set by the server
   const saveUserToCookies = (userData: User) => {
     // Client-side cookies with cookies-next for state display only
-    setCookie('user_email_client', userData.email, cookieOptions);
+    // Make sure to decode email before saving
+    setCookie('user_email_client', decodeURIComponent(userData.email), cookieOptions);
     console.log("[Auth] Client cookies saved");
   };
 
@@ -177,7 +178,7 @@ export const useAuth = () => {
     onSuccess: (data) => {
       console.log("Login successful:", data);
       const userData = {
-        email: data.email,
+        email: decodeURIComponent(data.email),
         token: data.token,
       };
       setUser(userData);
