@@ -1,16 +1,18 @@
 import { NextResponse } from 'next/server';
-
-interface LoginRequestBody {
-  email: string;
-  password: string;
-}
+import { 
+  AUTH_COOKIE_NAME, 
+  USER_COOKIE_NAME, 
+  cookieOptions, 
+  generateToken,
+  type AuthCredentials 
+} from '@/lib/auth';
 
 export async function POST(request: Request) {
   console.log("[API] Login request received");
   
   try {
     // Try to parse the request body as JSON
-    let body: LoginRequestBody;
+    let body: AuthCredentials;
     try {
       body = await request.json();
       console.log("[API] Login request body parsed:", { email: body.email });
@@ -34,51 +36,29 @@ export async function POST(request: Request) {
     // Here you would typically validate the user credentials against a database
     // For demo purposes, we'll just return a mock response
     
-    // Simple mock authentication - in a real app, you would check credentials
-    // against a database and use proper password hashing
-    
     // Generate a token
-    const token = 'jwt_token_' + Math.random().toString(36).substring(2, 15);
-    console.log("[API] Generated token:", token);
+    const token = generateToken('jwt');
+    console.log("[API] Generated token:", `${token.substring(0, 10)}...`);
     
-    // Create response
+    // Create response data
     const responseData = {
       email: body.email,
       token: token,
       message: 'Login successful'
     };
     
+    // Create the response
     const response = NextResponse.json(responseData, { status: 200 });
     
-    // Set cookies for authentication with fixed settings
-    const oneWeek = 7 * 24 * 60 * 60;
-    response.cookies.set('auth_token', token, { 
-      path: '/',
-      maxAge: oneWeek,
-      httpOnly: true,
-      sameSite: 'lax',  // Changed from strict to lax to work better with redirects
-      secure: process.env.NODE_ENV === 'production'
-    });
-    response.cookies.set('user_email', body.email, { 
-      path: '/',
-      maxAge: oneWeek,
-      httpOnly: true,
-      sameSite: 'lax',  // Changed from strict to lax
-      secure: process.env.NODE_ENV === 'production'
-    });
+    // Set cookies for authentication with the predefined options
+    response.cookies.set(AUTH_COOKIE_NAME, token, cookieOptions);
+    response.cookies.set(USER_COOKIE_NAME, body.email, cookieOptions);
     
-    // Log detailed cookie information
-    console.log("[API] Setting cookies:", {
-      auth_token: {
-        value: `${token.substring(0, 10)}...`,
-        options: {
-          path: '/',
-          maxAge: oneWeek,
-          httpOnly: true,
-          sameSite: 'lax',
-          secure: process.env.NODE_ENV === 'production'
-        }
-      }
+    // Log the cookie operation
+    console.log("[API] Setting auth cookies with options:", {
+      token: `${token.substring(0, 10)}...`,
+      email: body.email,
+      options: cookieOptions
     });
     
     console.log("[API] Login response ready:", { status: 200 });

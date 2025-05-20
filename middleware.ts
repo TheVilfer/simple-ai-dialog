@@ -1,40 +1,38 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { AUTH_COOKIE_NAME } from '@/lib/auth';
 
 // Routes that don't require authentication
-const publicRoutes = ['/auth/login', '/auth/register'];
+const PUBLIC_ROUTES = ['/auth/login', '/auth/register', '/debug/cookies'];
 
 // API routes that don't require authentication
-const publicApiRoutes = ['/api/login', '/api/register', '/api/logout'];
+const PUBLIC_API_ROUTES = ['/api/login', '/api/register', '/api/logout'];
 
 export function middleware(request: NextRequest) {
   // Get all cookies for debugging
   const cookieList = request.cookies.getAll();
-  const cookieValues = cookieList.map(c => `${c.name}=${c.value.substring(0, 10)}...`).join(', ');
+  const cookieValues = cookieList.map(c => `${c.name}=${c.value.substring(0, 5)}...`).join(', ');
   
   // Get the token from cookies
-  const authToken = request.cookies.get('auth_token');
-  const userEmail = request.cookies.get('user_email');
+  const authToken = request.cookies.get(AUTH_COOKIE_NAME);
   const { pathname, search } = request.nextUrl;
   const method = request.method;
 
   // Enhanced logging
   console.log(`[Middleware] ${method} ${pathname}${search || ''}`);
-  console.log(`[Middleware] Cookies: ${cookieValues}`);
-  console.log(`[Middleware] auth_token: ${authToken ? `${authToken.value.substring(0, 10)}...` : 'None'}`);
-  console.log(`[Middleware] user_email: ${userEmail ? userEmail.value : 'None'}`);
-
+  console.log(`[Middleware] Cookies: ${cookieValues || 'None'}`);
+  
   // Use the token for auth check
   const token = authToken?.value;
 
   // Allow access to public routes regardless of authentication
-  if (publicRoutes.some(route => pathname.startsWith(route))) {
+  if (PUBLIC_ROUTES.some(route => pathname.startsWith(route))) {
     console.log(`[Middleware] Access allowed to public route: ${pathname}`);
     return NextResponse.next();
   }
 
   // Allow access to public API routes
-  if (publicApiRoutes.some(route => pathname === route)) {
+  if (PUBLIC_API_ROUTES.some(route => pathname === route)) {
     console.log(`[Middleware] Access allowed to public API route: ${pathname}`);
     return NextResponse.next();
   }

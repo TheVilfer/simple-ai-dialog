@@ -1,60 +1,38 @@
 import { NextResponse } from 'next/server';
+import { getUserFromRequest } from '@/lib/auth';
 
 export async function GET(request: Request) {
+  console.log("[API] /me endpoint called");
+
   try {
-    // First check the Authorization header
-    const authHeader = request.headers.get('Authorization');
-    let token: string | undefined;
+    // Get the user from the request
+    const user = getUserFromRequest(request);
     
-    if (authHeader && authHeader.startsWith('Bearer ')) {
-      token = authHeader.split(' ')[1];
-    }
-    
-    // If no token in header, check cookies from the request
-    if (!token) {
-      // Extract cookies from request
-      const cookieHeader = request.headers.get('cookie');
-      if (cookieHeader) {
-        const cookies = parseCookies(cookieHeader);
-        token = cookies['auth_token'];
-      }
-    }
-    
-    if (!token) {
+    // If no user is found, return 401
+    if (!user) {
+      console.log("[API] Authentication failed");
       return NextResponse.json(
-        { message: 'Authentication token is missing or invalid' },
+        { message: 'Authentication required' },
         { status: 401 }
       );
     }
     
-    // In a real application, you would verify the JWT token here
-    // For demo purposes, we'll just check if it exists and return mock data
-    
-    // Mock user data
-    // In a real application, this data would come from a database
+    // Log the authenticated user
+    console.log("[API] Authenticated user:", { email: user.email });
+
+    // In a real application, you would fetch more user data from a database
+    // For demo purposes, we'll just return mock data
     return NextResponse.json({
-      email: 'user@example.com',
+      email: user.email,
       registeredAt: new Date().toISOString(),
       subscriptions: ['Basic Plan', 'Premium Content']
     });
     
   } catch (error) {
-    console.error('Profile error:', error);
+    console.error('[API] Profile error:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
       { status: 500 }
     );
   }
-}
-
-// Helper function to parse cookies from a cookie header
-function parseCookies(cookieHeader: string): Record<string, string> {
-  const cookies: Record<string, string> = {};
-  cookieHeader.split(';').forEach((cookie) => {
-    const [name, value] = cookie.trim().split('=');
-    if (name && value) {
-      cookies[name] = value;
-    }
-  });
-  return cookies;
 } 
