@@ -3,7 +3,7 @@
 import { useEffect, useState, Suspense } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useAuth } from "@/lib/providers/auth-provider";
-import { Skeleton } from "@/components/ui/skeleton";
+import { LoadingSkeleton } from "@/components/ui/loading-skeleton";
 
 // Create a separate component for navigation handling
 function NavigationHandler({ children }: { children: React.ReactNode }) {
@@ -32,35 +32,12 @@ function NavigationHandler({ children }: { children: React.ReactNode }) {
 
   // Show loading state while checking
   if (isLoading || (isChecking && !isAuthenticated)) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-center">
-          <div className="space-y-4 w-64">
-            <Skeleton className="h-12 w-12 rounded-full mx-auto" />
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-3/4 mx-auto" />
-          </div>
-        </div>
-      </div>
-    );
+    return <LoadingSkeleton variant="page" />;
   }
 
   // Render children if authenticated
   return <>{children}</>;
 }
-
-// Loading fallback component
-const LoadingSkeleton = () => (
-  <div className="flex min-h-screen items-center justify-center">
-    <div className="text-center">
-      <div className="space-y-4 w-64">
-        <Skeleton className="h-12 w-12 rounded-full mx-auto" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-3/4 mx-auto" />
-      </div>
-    </div>
-  </div>
-);
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -68,7 +45,7 @@ interface ProtectedRouteProps {
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   return (
-    <Suspense fallback={<LoadingSkeleton />}>
+    <Suspense fallback={<LoadingSkeleton variant="page" />}>
       <NavigationHandler>
         {children}
       </NavigationHandler>

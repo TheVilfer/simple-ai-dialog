@@ -10,6 +10,7 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { LoadingSkeleton } from "@/components/ui/loading-skeleton";
 
 // Create a loading fallback
 const RegisterFormSkeleton = () => (
@@ -151,9 +152,7 @@ function RegisterFormWithParams() {
           
           <Button type="submit" disabled={isRegistering} className="w-full">
             {isRegistering ? (
-              <div className="flex justify-center items-center gap-2">
-                <Skeleton className="h-4 w-24 rounded-md" />
-              </div>
+              <LoadingSkeleton variant="button" size="md" />
             ) : tCommon("register")}
           </Button>
         </div>

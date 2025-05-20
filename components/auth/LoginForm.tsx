@@ -10,6 +10,7 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { LoadingSkeleton } from "@/components/ui/loading-skeleton";
 
 // Create a loading fallback
 const LoginFormSkeleton = () => (
@@ -116,9 +117,7 @@ function LoginFormWithParams() {
           
           <Button type="submit" disabled={isLoggingIn} className="w-full">
             {isLoggingIn ? (
-              <div className="flex justify-center items-center gap-2">
-                <Skeleton className="h-4 w-16 rounded-md" />
-              </div>
+              <LoadingSkeleton variant="button" size="sm" />
             ) : tCommon("login")}
           </Button>
         </div>

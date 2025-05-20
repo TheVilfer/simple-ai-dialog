@@ -8,6 +8,7 @@ import { MessageSquare } from "lucide-react";
 import { ThemeToggleSimple } from "@/components/ui/theme-toggle";
 import { LanguageSwitcherSimple } from "@/components/ui/language-switcher";
 import { useTranslations } from "next-intl";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProfileInfo() {
   const { profile, isLoadingProfile, profileError, user, logout } = useAuth();
@@ -27,9 +28,41 @@ export default function ProfileInfo() {
 
   if (isLoadingProfile) {
     return (
-      <div className="text-center py-10">
-        <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-        <p className="text-muted-foreground">{tProfile("loadingProfile")}</p>
+      <div className="space-y-8">
+        <div className="flex justify-between items-center">
+          <Skeleton className="h-8 w-40" />
+          <div className="flex gap-2">
+            <Skeleton className="h-9 w-9" />
+            <Skeleton className="h-9 w-9" />
+            <Skeleton className="h-9 w-24" />
+            <Skeleton className="h-9 w-20" />
+          </div>
+        </div>
+        
+        <div className="grid gap-6">
+          <div className="rounded-lg border border-border p-6 bg-card">
+            <Skeleton className="h-6 w-32 mb-4" />
+            <div className="space-y-4">
+              <div>
+                <Skeleton className="h-3 w-10 mb-1" />
+                <Skeleton className="h-5 w-48" />
+              </div>
+              <div>
+                <Skeleton className="h-3 w-24 mb-1" />
+                <Skeleton className="h-5 w-32" />
+              </div>
+            </div>
+          </div>
+          
+          <div className="rounded-lg border border-border p-6 bg-card">
+            <Skeleton className="h-6 w-40 mb-4" />
+            <div className="space-y-2">
+              <Skeleton className="h-5 w-full" />
+              <Skeleton className="h-5 w-3/4" />
+              <Skeleton className="h-5 w-2/3" />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
