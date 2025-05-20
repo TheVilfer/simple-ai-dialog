@@ -1,0 +1,53 @@
+{
+  "common": {
+    "login": "Войти",
+    "register": "Регистрация",
+    "logout": "Выйти",
+    "email": "Email",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "chat": "Чат",
+    "profile": "Профиль",
+    "newChat": "Новый чат",
+    "back": "Назад",
+    "submit": "Отправить",
+    "loading": "Загрузка...",
+    "tryAgain": "Попробовать снова",
+    "error": "Ошибка",
+    "language": "Язык",
+    "theme": "Тема",
+    "light": "Светлая",
+    "dark": "Темная",
+    "system": "Системная"
+  },
+  "auth": {
+    "loginTitle": "Войти в аккаунт",
+    "loginDescription": "Введите данные ниже, чтобы войти в аккаунт",
+    "registerTitle": "Создать аккаунт",
+    "registerDescription": "Введите данные ниже, чтобы создать аккаунт",
+    "noAccount": "Нет аккаунта?",
+    "alreadyHaveAccount": "Уже есть аккаунт?",
+    "emailRequired": "Email обязателен",
+    "passwordRequired": "Пароль обязателен",
+    "passwordLength": "Пароль должен содержать не менее 6 символов",
+    "passwordsDoNotMatch": "Пароли не совпадают",
+    "invalidEmail": "Пожалуйста, введите корректный email",
+    "loginError": "Ошибка при входе, попробуйте ещё раз",
+    "registerError": "Ошибка при регистрации, попробуйте ещё раз"
+  },
+  "profile": {
+    "myProfile": "Мой профиль",
+    "userInfo": "Информация о пользователе",
+    "registrationDate": "Дата регистрации",
+    "subscriptions": "Подписки",
+    "noSubscriptions": "У вас нет активных подписок",
+    "loadingProfile": "Загрузка данных профиля..."
+  },
+  "chat": {
+    "sendMessage": "Отправить сообщение",
+    "typeMessage": "Введите сообщение...",
+    "empty": "Нет сообщений",
+    "waitingResponse": "Ожидание ответа...",
+    "startChatInstructions": "Отправьте сообщение, чтобы начать общение. Попробуйте спросить \"Покажи пример markdown\"."
+  }
+} 

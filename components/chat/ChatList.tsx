@@ -5,6 +5,7 @@ import { useChat } from "@/hooks/useChat";
 import { ChatMessage } from "@/components/chat/ChatMessage";
 import { Bot } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslations } from "next-intl";
 
 interface ChatListProps {
   emptyState?: ReactNode;
@@ -15,6 +16,7 @@ export function ChatList({ emptyState, className }: ChatListProps) {
   const { messages, isLoading } = useChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations("chat");
   
   // Scroll to bottom when messages change or when loading state changes
   useEffect(() => {
@@ -31,9 +33,9 @@ export function ChatList({ emptyState, className }: ChatListProps) {
       <div className="flex h-24 w-24 items-center justify-center rounded-full bg-muted">
         <Bot className="h-12 w-12 text-muted-foreground" />
       </div>
-      <h3 className="mt-6 text-xl font-semibold">Начните новый чат</h3>
+      <h3 className="mt-6 text-xl font-semibold">{t("empty")}</h3>
       <p className="mb-8 mt-2 text-center text-sm text-muted-foreground max-w-xs sm:max-w-sm">
-        Отправьте сообщение, чтобы начать общение. Попробуйте спросить &quot;Покажи пример markdown&quot;.
+        {t("startChatInstructions")}
       </p>
     </div>
   );

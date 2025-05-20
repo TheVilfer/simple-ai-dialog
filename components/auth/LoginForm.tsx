@@ -9,6 +9,7 @@ import { useAuth } from "@/lib/providers/auth-provider";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 // Create a loading fallback
 const LoginFormSkeleton = () => (
@@ -39,6 +40,9 @@ function LoginFormWithParams() {
   const { login, isLoggingIn, loginError } = useAuth();
   const searchParams = useSearchParams();
   const fromPath = searchParams.get('from') || '/profile';
+  
+  const tCommon = useTranslations("common");
+  const tAuth = useTranslations("auth");
 
   const validateForm = () => {
     // Clear previous errors
@@ -46,13 +50,13 @@ function LoginFormWithParams() {
 
     // Basic email validation
     if (!email) {
-      setCustomError("Email обязателен");
+      setCustomError(tAuth("emailRequired"));
       return false;
     }
 
     // Password validation
     if (!password) {
-      setCustomError("Пароль обязателен");
+      setCustomError(tAuth("passwordRequired"));
       return false;
     }
 
@@ -70,7 +74,7 @@ function LoginFormWithParams() {
       login({ email, password });
     } catch (error) {
       console.error("Login error:", error);
-      setCustomError("Ошибка при входе, попробуйте ещё раз");
+      setCustomError(tAuth("loginError"));
     }
   };
 
@@ -79,7 +83,7 @@ function LoginFormWithParams() {
       <form onSubmit={onSubmit} noValidate>
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{tCommon("email")}</Label>
             <Input
               id="email"
               placeholder="name@example.com"
@@ -95,7 +99,7 @@ function LoginFormWithParams() {
           </div>
           
           <div className="grid gap-2">
-            <Label htmlFor="password">Пароль</Label>
+            <Label htmlFor="password">{tCommon("password")}</Label>
             <Input
               id="password"
               placeholder="••••••"
@@ -115,20 +119,20 @@ function LoginFormWithParams() {
               <div className="flex justify-center items-center gap-2">
                 <Skeleton className="h-4 w-16 rounded-md" />
               </div>
-            ) : "Войти"}
+            ) : tCommon("login")}
           </Button>
         </div>
       </form>
       
       <div className="text-center text-sm">
         <span className="text-muted-foreground">
-          Нет аккаунта?{" "}
+          {tAuth("noAccount")}{" "}
         </span>
         <Link 
           href={`/auth/register${fromPath ? `?from=${encodeURIComponent(fromPath)}` : ''}`}
           className="text-primary underline-offset-4 hover:underline"
         >
-          Зарегистрируйтесь
+          {tCommon("register")}
         </Link>
       </div>
     </div>

@@ -1,0 +1,53 @@
+{
+  "common": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "chat": "Chat",
+    "profile": "Profile",
+    "newChat": "New Chat",
+    "back": "Back",
+    "submit": "Submit",
+    "loading": "Loading...",
+    "tryAgain": "Try Again",
+    "error": "Error",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "auth": {
+    "loginTitle": "Login to your account",
+    "loginDescription": "Enter your details below to login to your account",
+    "registerTitle": "Create an account",
+    "registerDescription": "Enter your details below to create an account",
+    "noAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "passwordLength": "Password must be at least 6 characters long",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "invalidEmail": "Please enter a valid email address",
+    "loginError": "Login error, please try again",
+    "registerError": "Registration error, please try again"
+  },
+  "profile": {
+    "myProfile": "My Profile",
+    "userInfo": "User Information",
+    "registrationDate": "Registration Date",
+    "subscriptions": "Subscriptions",
+    "noSubscriptions": "You have no active subscriptions",
+    "loadingProfile": "Loading profile data..."
+  },
+  "chat": {
+    "sendMessage": "Send message",
+    "typeMessage": "Type your message here...",
+    "empty": "No messages yet",
+    "waitingResponse": "Waiting for response...",
+    "startChatInstructions": "Send a message to start chatting. Try asking \"Show me a markdown example\"."
+  }
+} 

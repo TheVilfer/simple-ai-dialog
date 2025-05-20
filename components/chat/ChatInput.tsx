@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { SendIcon } from "lucide-react";
 import { useChat } from "@/hooks/useChat";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslations } from "next-intl";
 
 interface ChatInputProps {
   placeholder?: string;
@@ -20,6 +21,7 @@ export function ChatInput({
   const [message, setMessage] = useState("");
   const { addMessage, simulateAiResponse, isLoading } = useChat();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const t = useTranslations("chat");
   
   // Auto-resize textarea based on content
   useEffect(() => {
@@ -58,7 +60,7 @@ export function ChatInput({
     }
   };
   
-  const defaultPlaceholder = isLoading ? "Ожидание ответа..." : "Написать сообщение...";
+  const defaultPlaceholder = isLoading ? t("waitingResponse") : t("typeMessage");
   
   return (
     <form 
@@ -75,6 +77,7 @@ export function ChatInput({
           className="flex w-full resize-none rounded-md border border-input bg-background px-3 py-2 text-sm min-h-[44px] max-h-[150px] ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
           disabled={isLoading}
           rows={1}
+          aria-label={t("typeMessage")}
         />
       </div>
       
@@ -83,6 +86,8 @@ export function ChatInput({
         size="icon"
         className="h-10 w-10 rounded-full flex-shrink-0"
         disabled={!message.trim() || isLoading}
+        aria-label={t("sendMessage")}
+        title={t("sendMessage")}
       >
         {isLoading ? (
           <Skeleton className="h-5 w-5 rounded-full" />

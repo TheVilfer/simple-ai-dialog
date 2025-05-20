@@ -9,9 +9,12 @@ import { useChat } from "@/hooks/useChat";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import Link from "next/link";
 import { ThemeToggleSimple } from "@/components/ui/theme-toggle";
+import { LanguageSwitcherSimple } from "@/components/ui/language-switcher";
+import { useTranslations } from "next-intl";
 
 export default function ChatClient() {
   const { clearMessages } = useChat();
+  const t = useTranslations("common");
   
   // Reset chat messages when component mounts
   useEffect(() => {
@@ -26,19 +29,20 @@ export default function ChatClient() {
             <Link 
               href="/profile" 
               className="mr-2 rounded-md p-1 hover:bg-muted transition-colors"
-              aria-label="Back to profile"
+              aria-label={t("back")}
             >
               <ArrowLeftIcon className="h-5 w-5" />
             </Link>
-            <h1 className="text-xl font-bold">Чат</h1>
+            <h1 className="text-xl font-bold">{t("chat")}</h1>
           </div>
           <div className="flex items-center gap-2">
+            <LanguageSwitcherSimple />
             <ThemeToggleSimple />
             <Button 
               variant="outline" 
               size="icon" 
               onClick={() => clearMessages()}
-              title="Новый чат"
+              title={t("newChat")}
             >
               <PlusIcon className="h-4 w-4" />
             </Button>

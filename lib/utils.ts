@@ -6,7 +6,21 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat('ru-RU', {
+  // Get locale from cookie or use default 'en-US'
+  const locale = typeof document !== 'undefined' 
+    ? (document.cookie
+        .split("; ")
+        .find(row => row.startsWith("NEXT_LOCALE="))
+        ?.split("=")[1] || 'en') 
+    : 'en';
+  
+  // Map to proper locale format
+  const localeMap: Record<string, string> = {
+    'en': 'en-US',
+    'ru': 'ru-RU'
+  };
+  
+  return new Intl.DateTimeFormat(localeMap[locale] || 'en-US', {
     day: '2-digit', 
     month: '2-digit', 
     year: 'numeric',

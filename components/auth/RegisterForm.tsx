@@ -9,6 +9,7 @@ import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 // Create a loading fallback
 const RegisterFormSkeleton = () => (
@@ -44,6 +45,9 @@ function RegisterFormWithParams() {
   const { register, isRegistering, registerError } = useAuth();
   const searchParams = useSearchParams();
   const fromPath = searchParams.get('from') || '/profile';
+  
+  const tCommon = useTranslations("common");
+  const tAuth = useTranslations("auth");
 
   const validateForm = () => {
     // Clear previous errors
@@ -52,27 +56,27 @@ function RegisterFormWithParams() {
     // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
-      setCustomError("Email обязателен");
+      setCustomError(tAuth("emailRequired"));
       return false;
     }
     if (!emailRegex.test(email)) {
-      setCustomError("Пожалуйста, введите корректный email");
+      setCustomError(tAuth("invalidEmail"));
       return false;
     }
 
     // Password validation
     if (!password) {
-      setCustomError("Пароль обязателен");
+      setCustomError(tAuth("passwordRequired"));
       return false;
     }
     
     if (password.length < 6) {
-      setCustomError("Пароль должен содержать не менее 6 символов");
+      setCustomError(tAuth("passwordLength"));
       return false;
     }
 
     if (password !== passwordConfirm) {
-      setCustomError("Пароли не совпадают");
+      setCustomError(tAuth("passwordsDoNotMatch"));
       return false;
     }
 
@@ -90,7 +94,7 @@ function RegisterFormWithParams() {
       register({ email, password });
     } catch (error) {
       console.error("Registration error:", error);
-      setCustomError("Ошибка при регистрации, попробуйте ещё раз");
+      setCustomError(tAuth("registerError"));
     }
   };
 
@@ -99,7 +103,7 @@ function RegisterFormWithParams() {
       <form onSubmit={onSubmit} noValidate>
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{tCommon("email")}</Label>
             <Input
               id="email"
               placeholder="name@example.com"
@@ -115,7 +119,7 @@ function RegisterFormWithParams() {
           </div>
           
           <div className="grid gap-2">
-            <Label htmlFor="password">Пароль</Label>
+            <Label htmlFor="password">{tCommon("password")}</Label>
             <Input
               id="password"
               placeholder="••••••"
@@ -130,7 +134,7 @@ function RegisterFormWithParams() {
           </div>
           
           <div className="grid gap-2">
-            <Label htmlFor="password-confirm">Подтвердите пароль</Label>
+            <Label htmlFor="password-confirm">{tCommon("confirmPassword")}</Label>
             <Input
               id="password-confirm"
               placeholder="••••••"
@@ -150,20 +154,20 @@ function RegisterFormWithParams() {
               <div className="flex justify-center items-center gap-2">
                 <Skeleton className="h-4 w-24 rounded-md" />
               </div>
-            ) : "Зарегистрироваться"}
+            ) : tCommon("register")}
           </Button>
         </div>
       </form>
       
       <div className="text-center text-sm">
         <span className="text-muted-foreground">
-          Уже есть аккаунт?{" "}
+          {tAuth("alreadyHaveAccount")}{" "}
         </span>
         <Link 
           href={`/auth/login${fromPath ? `?from=${encodeURIComponent(fromPath)}` : ''}`}
           className="text-primary underline-offset-4 hover:underline"
         >
-          Войдите
+          {tCommon("login")}
         </Link>
       </div>
     </div>

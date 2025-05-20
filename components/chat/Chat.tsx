@@ -6,6 +6,7 @@ import { ChatInput } from "@/components/chat/ChatInput";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
 import { useChat } from "@/hooks/useChat";
+import { useTranslations } from "next-intl";
 
 interface ChatProps {
   title?: string;
@@ -16,13 +17,14 @@ interface ChatProps {
 }
 
 export function Chat({
-  title = "Чат",
+  title,
   headerRight,
   onNewChat,
   customHandler,
   clearOnMount = true,
 }: ChatProps) {
   const { clearMessages } = useChat();
+  const t = useTranslations("common");
 
   const handleNewChat = () => {
     clearMessages();
@@ -41,14 +43,15 @@ export function Chat({
   return (
     <div className="flex h-full flex-col max-w-5xl mx-auto overflow-hidden">
       <header className="sticky top-0 z-10 flex items-center justify-between border-b bg-background p-4">
-        <h1 className="text-xl font-bold">{title}</h1>
+        <h1 className="text-xl font-bold">{title || t("chat")}</h1>
         <div className="flex gap-2 items-center">
           {headerRight}
           <Button 
             variant="outline" 
             size="icon" 
             onClick={handleNewChat}
-            title="Новый чат"
+            title={t("newChat")}
+            aria-label={t("newChat")}
           >
             <PlusIcon className="h-4 w-4" />
           </Button>
