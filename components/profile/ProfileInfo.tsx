@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
-import { MessageSquare, Image } from "lucide-react";
+import { MessageSquare, ImageIcon } from "lucide-react";
 import { ThemeToggleSimple } from "@/components/ui/theme-toggle";
 import { LanguageSwitcherSimple } from "@/components/ui/language-switcher";
 import { useTranslations } from "next-intl";
@@ -104,7 +104,7 @@ export default function ProfileInfo() {
             href="/explore" 
             className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 h-9 px-3 sm:px-4 py-2 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground"
           >
-            <Image className="h-4 w-4 mr-2" />
+            <ImageIcon className="h-4 w-4 mr-2" />
             <span>{tCommon("explore")}</span>
           </Link>
           <Link 
