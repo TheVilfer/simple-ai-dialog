@@ -8,6 +8,7 @@
     "confirmPassword": "Подтвердите пароль",
     "chat": "Чат",
     "profile": "Профиль",
+    "explore": "Галерея",
     "newChat": "Новый чат",
     "back": "Назад",
     "submit": "Отправить",
@@ -22,7 +23,10 @@
     "confirmLogout": "Вы уверены, что хотите выйти?",
     "yes": "Да",
     "no": "Нет",
-    "cancel": "Отмена"
+    "cancel": "Отмена",
+    "refresh": "Обновить",
+    "download": "Скачать",
+    "close": "Закрыть"
   },
   "auth": {
     "loginTitle": "Войти в аккаунт",
@@ -61,5 +65,27 @@
     "messageCopied": "Сообщение скопировано в буфер обмена",
     "markdownSupported": "Поддерживается форматирование Markdown",
     "copyMessage": "Копировать сообщение"
+  },
+  "explore": {
+    "title": "Галерея",
+    "description": "Откройте для себя красивые изображения от талантливых фотографов со всего мира",
+    "loadingImages": "Загрузка изображений...",
+    "errorLoading": "Не удалось загрузить изображения. Проверьте настройки API.",
+    "noImages": "Изображения не найдены",
+    "refreshImages": "Получить новые изображения",
+    "imageBy": "автор:",
+    "likes": "лайков",
+    "viewProfile": "Посмотреть профиль",
+    "downloadImage": "Скачать изображение",
+    "imageDetails": "Детали изображения",
+    "photographer": "Фотограф",
+    "publishedOn": "Опубликовано",
+    "dimensions": "Размеры",
+    "tags": "Теги",
+    "noTags": "Теги отсутствуют",
+    "unsplashCredit": "Фото {photographer} на Unsplash",
+    "apiKeyMissing": "API ключ Unsplash не настроен. Добавьте NEXT_PUBLIC_UNSPLASH_ACCESS_KEY в переменные окружения.",
+    "rateLimitExceeded": "Превышен лимит запросов API. Попробуйте позже.",
+    "networkError": "Ошибка сети. Проверьте подключение к интернету."
   }
 } 

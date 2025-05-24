@@ -8,6 +8,7 @@
     "confirmPassword": "Confirm Password",
     "chat": "Chat",
     "profile": "Profile",
+    "explore": "Explore",
     "newChat": "New Chat",
     "back": "Back",
     "submit": "Submit",
@@ -22,7 +23,10 @@
     "confirmLogout": "Are you sure you want to log out?",
     "yes": "Yes",
     "no": "No",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "refresh": "Refresh",
+    "download": "Download",
+    "close": "Close"
   },
   "auth": {
     "loginTitle": "Login to your account",
@@ -61,5 +65,27 @@
     "messageCopied": "Message copied to clipboard",
     "markdownSupported": "Markdown formatting supported",
     "copyMessage": "Copy message"
+  },
+  "explore": {
+    "title": "Explore",
+    "description": "Discover beautiful images from talented photographers around the world",
+    "loadingImages": "Loading images...",
+    "errorLoading": "Failed to load images. Please check your API configuration.",
+    "noImages": "No images found",
+    "refreshImages": "Get new images",
+    "imageBy": "by",
+    "likes": "likes",
+    "viewProfile": "View Profile",
+    "downloadImage": "Download Image",
+    "imageDetails": "Image Details",
+    "photographer": "Photographer",
+    "publishedOn": "Published on",
+    "dimensions": "Dimensions",
+    "tags": "Tags",
+    "noTags": "No tags available",
+    "unsplashCredit": "Photo by {photographer} on Unsplash",
+    "apiKeyMissing": "Unsplash API key not configured. Please add NEXT_PUBLIC_UNSPLASH_ACCESS_KEY to your environment variables.",
+    "rateLimitExceeded": "API rate limit exceeded. Please try again later.",
+    "networkError": "Network error. Please check your internet connection."
   }
 } 

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ChatList } from "@/components/chat/ChatList";
 import { ChatInput } from "@/components/chat/ChatInput";
 import { Button } from "@/components/ui/button";
-import { PlusIcon, ArrowLeftIcon } from "lucide-react";
+import { PlusIcon, ArrowLeftIcon, Image } from "lucide-react";
 import { useChat } from "@/hooks/useChat";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import Link from "next/link";
@@ -53,6 +53,13 @@ export default function ChatClient() {
           <div className="flex items-center gap-1 sm:gap-2">
             <LanguageSwitcherSimple />
             <ThemeToggleSimple />
+            <Link 
+              href="/explore" 
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 h-8 w-8 sm:h-9 sm:w-9 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground"
+              title={t("explore")}
+            >
+              <Image className="h-3 w-3 sm:h-4 sm:w-4" />
+            </Link>
             <Button 
               variant="outline" 
               size="icon" 

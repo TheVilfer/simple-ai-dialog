@@ -1,6 +1,6 @@
 # Simple AI Dialog with Self-written Auth
 
-Simple AI Dialog is a modern, feature-rich chat application built with Next.js. It provides a fully functional custom-built authentication system, real-time chat capabilities, and a sleek, responsive user interface with support for multiple languages and themes.
+Simple AI Dialog is a modern, feature-rich chat application built with Next.js. It provides a fully functional custom-built authentication system, real-time chat capabilities, an image exploration gallery, and a sleek, responsive user interface with support for multiple languages and themes.
 
 ## Features
 
@@ -14,6 +14,16 @@ Simple AI Dialog is a modern, feature-rich chat application built with Next.js. 
 - Code syntax highlighting in chat messages
 - Message history with timestamp display
 - New chat creation with simple UI
+
+### Image Exploration
+- **Explore Page**: Midjourney-style image gallery powered by Unsplash API
+- **Masonry Grid Layout**: Responsive grid with different sized image cards
+- **Image Modal**: Full-screen image preview with detailed information
+- **Image Information**: Photographer details, likes, tags, and creation date
+- **Download Feature**: Direct image download functionality
+- **Skeleton Loading**: Beautiful loading states while fetching images
+- **Mobile Responsive**: Optimized for mobile with 2-column layout
+- **Multi-language Support**: Full internationalization support for English and Russian
 
 ### Internationalization
 - Full support for English and Russian languages
@@ -30,9 +40,12 @@ Simple AI Dialog is a modern, feature-rich chat application built with Next.js. 
 - **Framework**: [Next.js 15](https://nextjs.org/)
 - **UI Library**: [React 19](https://react.dev/)
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/) with Radix UI primitives
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **State Management**: 
   - [Zustand](https://github.com/pmndrs/zustand) for global state
   - [React Query](https://tanstack.com/query) for API calls
+- **Image API**: [Unsplash API](https://unsplash.com/developers)
 - **Internationalization**: [next-intl](https://next-intl-docs.vercel.app/)
 - **Icons**: [Lucide React](https://lucide.dev/guide/packages/lucide-react)
 - **Markdown Rendering**: [React Markdown](https://github.com/remarkjs/react-markdown)
@@ -44,6 +57,7 @@ Simple AI Dialog is a modern, feature-rich chat application built with Next.js. 
 
 - Node.js 18.x or later
 - pnpm 8.x or later
+- Unsplash API key (for explore page functionality)
 
 ### Installation
 
@@ -58,12 +72,24 @@ Simple AI Dialog is a modern, feature-rich chat application built with Next.js. 
    pnpm install
    ```
 
-3. Run the development server:
+3. Set up environment variables:
+   ```bash
+   cp .env.example .env.local
+   ```
+   
+   Edit `.env.local` and add your Unsplash API key:
+   ```
+   NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=your_unsplash_access_key_here
+   ```
+   
+   Get your API key from [Unsplash Developers](https://unsplash.com/developers)
+
+4. Run the development server:
    ```bash
    pnpm dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
 ## Project Structure
 
@@ -73,15 +99,18 @@ simple-ai-dialog/
 │   ├── api/            # API routes
 │   ├── auth/           # Authentication pages
 │   ├── chat/           # Chat application pages
+│   ├── explore/        # Image exploration page
 │   ├── profile/        # User profile pages
 ├── components/         # React components
 │   ├── auth/           # Authentication components
 │   ├── chat/           # Chat interface components
+│   ├── explore/        # Image gallery components
 │   ├── profile/        # Profile components
 │   ├── ui/             # UI components
 ├── hooks/              # Custom React hooks
 ├── lib/                # Utility functions
 │   ├── providers/      # React context providers
+│   ├── types/          # TypeScript type definitions
 ├── messages/           # Internationalization messages
 │   ├── en.json         # English translations
 │   ├── ru.json         # Russian translations
@@ -97,7 +126,7 @@ simple-ai-dialog/
 The application starts with authentication screens. You can:
 - Register a new account with email and password
 - Login with existing credentials
-- Access protected routes like chat and profile after authentication
+- Access protected routes like chat, explore, and profile after authentication
 
 ### Chat
 
@@ -107,13 +136,36 @@ Once authenticated, you can:
 - View message history with timestamps
 - Switch between languages while chatting
 
+### Explore
+
+The explore page offers:
+- **Image Gallery**: Browse beautiful images from Unsplash in a masonry layout
+- **Image Details**: Click any image to view it in full-screen with photographer info
+- **Download Images**: Download high-quality images directly
+- **Responsive Design**: Optimized viewing on all device sizes
+- **Refresh Content**: Get new random images with the refresh button
+
 ### Profile
 
 The profile page displays:
 - User information including email
 - Registration date
 - Subscription information
+- Navigation to chat and explore pages
 - Options to switch themes and languages
+
+## API Configuration
+
+### Unsplash API
+
+The explore page uses the Unsplash API to fetch random images. To set it up:
+
+1. Visit [Unsplash Developers](https://unsplash.com/developers)
+2. Create a new application
+3. Copy your Access Key
+4. Add it to your `.env.local` file as `NEXT_PUBLIC_UNSPLASH_ACCESS_KEY`
+
+**Note**: The free tier allows 50 requests per hour, which is sufficient for development and light usage.
 
 ## Internationalization
 
@@ -131,5 +183,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [Next.js](https://nextjs.org/) for the amazing React framework
 - [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
+- [shadcn/ui](https://ui.shadcn.com/) for the beautiful UI components
+- [Unsplash](https://unsplash.com/) for providing the image API and beautiful photography
 - [next-intl](https://next-intl-docs.vercel.app/) for the internationalization solution
 - [Zustand](https://github.com/pmndrs/zustand) for the state management
