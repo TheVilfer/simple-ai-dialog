@@ -78,13 +78,15 @@ export function ImageModal({ image, isOpen, onClose }: ImageModalProps) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-        <DialogPrimitive.Content className="fixed left-[50%] top-[50%] z-50 w-full h-[90vh] max-w-7xl translate-x-[-50%] translate-y-[-50%] p-0 overflow-hidden duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]">
+        <DialogPrimitive.Content className="fixed left-[50%] top-[50%] z-50 w-full h-[90vh] max-w-7xl translate-x-[-50%] translate-y-[-50%] p-0 overflow-hidden rounded-xl shadow-2xl duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]">
           {/* Visually hidden title for accessibility */}
           <DialogTitle className="sr-only">
             {image.description || image.alt_description || `Photo by ${image.user.name}`}
           </DialogTitle>
           
-          <div className={`relative w-full h-full ${resolvedTheme === 'light' ? 'bg-white' : 'bg-black'}`}>
+          <div className={`relative w-full h-full rounded-xl overflow-hidden ${
+            resolvedTheme === 'light' ? 'bg-white' : 'bg-slate-950'
+          }`}>
             {/* Close button */}
             <Button
               variant="ghost"
