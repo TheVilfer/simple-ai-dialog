@@ -36,7 +36,7 @@ export default function ProfileInfo() {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     setShowLogoutDialog(false);
     logout();
   };
