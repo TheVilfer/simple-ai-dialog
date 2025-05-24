@@ -22,7 +22,7 @@ async function fetchRandomImages(count: number = 30): Promise<UnsplashImage[]> {
   }
 
   const response = await fetch(
-    `https://api.unsplash.com/photos/random?count=${count}&orientation=portrait,landscape,squarish`,
+    `https://api.unsplash.com/photos/random?count=${count}`,
     {
       headers: {
         Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}`,

@@ -110,7 +110,7 @@ export function ImageGrid({ images, onImageClick }: ImageGridProps) {
                   </div>
                   
                   <div className="flex gap-1">
-                    {image.tags.slice(0, 2).map((tag, tagIndex) => (
+                    {image.tags && image.tags.length > 0 && image.tags.slice(0, 2).map((tag, tagIndex) => (
                       <Badge 
                         key={tagIndex} 
                         variant="outline" 

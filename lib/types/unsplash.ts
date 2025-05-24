@@ -16,7 +16,7 @@ export interface UnsplashImage {
       small: string;
     };
   };
-  tags: Array<{
+  tags?: Array<{
     title: string;
   }>;
   width: number;
