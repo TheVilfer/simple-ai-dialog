@@ -5,17 +5,20 @@ Simple AI Dialog is a modern, feature-rich chat application built with Next.js. 
 ## Features
 
 ### User Authentication
+
 - Complete custom authentication flow with secure login and registration
 - Protected routes that redirect unauthenticated users
 - Profile management with user information display
 
 ### Chat Interface
+
 - Real-time messaging with markdown support
 - Code syntax highlighting in chat messages
 - Message history with timestamp display
 - New chat creation with simple UI
 
 ### Image Exploration
+
 - **Explore Page**: Midjourney-style image gallery powered by Unsplash API
 - **Masonry Grid Layout**: Responsive grid with different sized image cards
 - **Image Modal**: Full-screen image preview with detailed information
@@ -26,11 +29,13 @@ Simple AI Dialog is a modern, feature-rich chat application built with Next.js. 
 - **Multi-language Support**: Full internationalization support for English and Russian
 
 ### Internationalization
+
 - Full support for English and Russian languages
 - Easy language switching throughout the application
 - Language preference persistence using cookies
 
 ### Theming
+
 - Light and dark mode support
 - System theme detection
 - Theme preference persistence using localStorage
@@ -42,7 +47,7 @@ Simple AI Dialog is a modern, feature-rich chat application built with Next.js. 
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
 - **UI Components**: [shadcn/ui](https://ui.shadcn.com/) with Radix UI primitives
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **State Management**: 
+- **State Management**:
   - [Zustand](https://github.com/pmndrs/zustand) for global state
   - [React Query](https://tanstack.com/query) for API calls
 - **Image API**: [Unsplash API](https://unsplash.com/developers)
@@ -62,29 +67,34 @@ Simple AI Dialog is a modern, feature-rich chat application built with Next.js. 
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/TheVilfer/simple-ai-dialog
    cd simple-ai-dialog
    ```
 
 2. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 3. Set up environment variables:
+
    ```bash
    cp .env.example .env.local
    ```
-   
+
    Edit `.env.local` and add your Unsplash API key:
-   ```
+
+   ```env
    NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=your_unsplash_access_key_here
    ```
-   
+
    Get your API key from [Unsplash Developers](https://unsplash.com/developers)
 
 4. Run the development server:
+
    ```bash
    pnpm dev
    ```
@@ -93,7 +103,7 @@ Simple AI Dialog is a modern, feature-rich chat application built with Next.js. 
 
 ## Project Structure
 
-```
+```text
 simple-ai-dialog/
 ├── app/                # Next.js app router
 │   ├── api/            # API routes
@@ -124,6 +134,7 @@ simple-ai-dialog/
 ### Authentication
 
 The application starts with authentication screens. You can:
+
 - Register a new account with email and password
 - Login with existing credentials
 - Access protected routes like chat, explore, and profile after authentication
@@ -131,6 +142,7 @@ The application starts with authentication screens. You can:
 ### Chat
 
 Once authenticated, you can:
+
 - Start new conversations with the "New Chat" button
 - Send messages with Markdown support
 - View message history with timestamps
@@ -139,6 +151,7 @@ Once authenticated, you can:
 ### Explore
 
 The explore page offers:
+
 - **Image Gallery**: Browse beautiful images from Unsplash in a masonry layout
 - **Image Details**: Click any image to view it in full-screen with photographer info
 - **Download Images**: Download high-quality images directly
@@ -148,6 +161,7 @@ The explore page offers:
 ### Profile
 
 The profile page displays:
+
 - User information including email
 - Registration date
 - Subscription information
@@ -167,11 +181,11 @@ The explore page uses the Unsplash API to fetch random images. To set it up:
 
 **Note**: The free tier allows 50 requests per hour, which is sufficient for development and light usage.
 
-## Internationalization
+## Language Support
 
 The application supports English and Russian languages. You can switch between them using the language switcher in the UI. The language preference is stored in cookies and persists between sessions.
 
-## Theming
+## Theme Configuration
 
 The application supports light and dark themes. You can switch between them using the theme toggle in the UI. The theme preference is stored in localStorage and persists between sessions.
 
