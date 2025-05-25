@@ -48,8 +48,6 @@ export default function ProfileInfo() {
   };
 
   if (isLoadingProfile) {
-    {
-  }
     return (
       <div className="space-y-6 sm:space-y-8">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0">
@@ -91,8 +89,6 @@ export default function ProfileInfo() {
   }
 
   if (profileError) {
-    {
-  }
     return (
       <div className="text-center py-6 sm:py-10">
         <div className="bg-destructive/15 p-3 sm:p-4 rounded-md mb-3 sm:mb-4 max-w-md mx-auto">

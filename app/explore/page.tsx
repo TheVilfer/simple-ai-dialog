@@ -32,8 +32,6 @@ interface ExplorePageState {
  */
 const getErrorMessage = (error: unknown, t: (key: string) => string): string => {
   if (error instanceof UnsplashApiError) {
-    {
-  }
     switch (error.code) {
       case 'MISSING_API_KEY':
       case 'INVALID_API_KEY':
@@ -48,8 +46,6 @@ const getErrorMessage = (error: unknown, t: (key: string) => string): string => 
   }
   
   if (error instanceof Error) {
-    {
-  }
     return error.message;
   }
   
@@ -184,8 +180,6 @@ export default function ExplorePage() {
   };
 
   if (error) {
-    {
-  }
     return (
       <ProtectedRoute>
         <div className="flex h-screen flex-col">

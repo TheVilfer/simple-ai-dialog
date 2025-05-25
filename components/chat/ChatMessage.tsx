@@ -119,8 +119,6 @@ export function ChatMessage({ message }: ChatMessageProps) {
                   ),
                   img: ({ src, alt }) => {
                     if (!src || typeof src !== 'string') {
-    {
-  }
                       return (
                         <span className="text-muted-foreground text-[10px]">
                           [Image cannot be displayed]
@@ -131,8 +129,6 @@ export function ChatMessage({ message }: ChatMessageProps) {
                     try {
                       const url = new URL(src);
                       if (url.protocol === 'http:' || url.protocol === 'https:') {
-    {
-  }
                         return (
                           <div className="relative max-w-full h-auto my-2 rounded-md overflow-hidden">
                             <Image

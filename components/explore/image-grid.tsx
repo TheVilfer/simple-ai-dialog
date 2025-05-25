@@ -193,8 +193,6 @@ export const ImageGrid = memo<ImageGridProps>(({
   }, []);
 
   if (images.length === 0) {
-    {
-  }
     return <EmptyState message={tExplore('noImages')} />;
   }
 
