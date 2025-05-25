@@ -22,22 +22,7 @@ export function ImageGrid({ images, onImageClick }: ImageGridProps) {
     setLoadedImages(prev => new Set([...prev, imageId]));
   };
 
-  // Calculate responsive grid columns
-  const getGridCols = () => {
-    return 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5';
-  };
 
-  // Calculate dynamic height based on aspect ratio
-  const getImageHeight = (image: UnsplashImage, index: number) => {
-    const aspectRatio = image.height / image.width;
-    const baseHeight = 200;
-    
-    // Add some randomness for masonry effect
-    const randomFactor = 0.7 + (index % 3) * 0.3;
-    const height = Math.max(150, Math.min(400, baseHeight * aspectRatio * randomFactor));
-    
-    return `${height}px`;
-  };
 
   if (images.length === 0) {
     return (
@@ -48,26 +33,29 @@ export function ImageGrid({ images, onImageClick }: ImageGridProps) {
   }
 
   return (
-    <div className={`grid gap-4 ${getGridCols()}`}>
+    <div className="columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4">
       {images.map((image, index) => (
         <motion.div
           key={image.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: index * 0.05 }}
-          className="group cursor-pointer"
+          className="group cursor-pointer break-inside-avoid mb-4"
           onClick={() => onImageClick(image)}
         >
-          <Card className="overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+          <Card className="overflow-hidden border-0 shadow-md hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.03] hover:-translate-y-1 p-0">
             <div 
               className="relative overflow-hidden bg-muted"
-              style={{ height: getImageHeight(image, index) }}
+              style={{ 
+                aspectRatio: `${image.width} / ${image.height}`,
+                minHeight: '150px'
+              }}
             >
               <Image
                 src={image.urls.small}
                 alt={image.alt_description || image.description || 'Unsplash image'}
                 fill
-                className={`object-cover transition-all duration-300 ${
+                className={`object-cover transition-all duration-500 group-hover:scale-110 ${
                   loadedImages.has(image.id) ? 'opacity-100' : 'opacity-0'
                 }`}
                 onLoad={() => handleImageLoad(image.id)}
@@ -80,22 +68,28 @@ export function ImageGrid({ images, onImageClick }: ImageGridProps) {
               )}
               
               {/* Overlay on hover */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
               
               {/* Image info overlay */}
-              <div className="absolute inset-0 p-3 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <div className="absolute inset-0 p-3 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                 <div className="flex justify-end">
                   <div className="flex gap-2">
-                    <Badge variant="secondary" className="bg-white/90 text-black">
-                      <Heart className="w-3 h-3 mr-1" />
+                    <Badge variant="secondary" className="bg-white/90 hover:bg-white text-black transition-all duration-200 hover:scale-105 cursor-pointer">
+                      <Heart className="w-3 h-3 mr-1 transition-transform duration-200 hover:scale-110" />
                       {image.likes}
                     </Badge>
                   </div>
                 </div>
                 
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-white">
-                    <div className="w-6 h-6 rounded-full overflow-hidden bg-white/20">
+                  <a
+                    href={`https://unsplash.com/@${image.user.username}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-white hover:text-white/90 transition-colors duration-200 cursor-pointer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="w-6 h-6 rounded-full overflow-hidden bg-white/20 hover:bg-white/30 transition-all duration-200 hover:scale-110">
                       <Image
                         src={image.user.profile_image.small}
                         alt={image.user.name}
@@ -104,17 +98,17 @@ export function ImageGrid({ images, onImageClick }: ImageGridProps) {
                         className="object-cover"
                       />
                     </div>
-                    <span className="text-sm font-medium truncate max-w-[100px]">
+                    <span className="text-sm font-medium truncate max-w-[100px] hover:underline">
                       {image.user.name}
                     </span>
-                  </div>
+                  </a>
                   
                   <div className="flex gap-1">
                     {image.tags && image.tags.length > 0 && image.tags.slice(0, 2).map((tag, tagIndex) => (
                       <Badge 
                         key={tagIndex} 
                         variant="outline" 
-                        className="bg-white/90 text-black text-xs border-0"
+                        className="bg-white/90 hover:bg-white text-black text-xs border-0 transition-all duration-200 hover:scale-105 cursor-pointer"
                       >
                         {tag.title}
                       </Badge>

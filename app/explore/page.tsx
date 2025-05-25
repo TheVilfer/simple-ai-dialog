@@ -105,8 +105,8 @@ export default function ExplorePage() {
               <div className="text-red-500 mb-4">
                 {getErrorMessage(error)}
               </div>
-              <Button onClick={handleRefresh} variant="outline">
-                <RefreshCw className="w-4 h-4 mr-2" />
+              <Button onClick={handleRefresh} variant="outline" className="transition-all duration-200 hover:scale-105 hover:shadow-lg">
+                <RefreshCw className="w-4 h-4 mr-2 transition-transform duration-200 hover:scale-110" />
                 {tCommon('tryAgain')}
               </Button>
             </div>
@@ -123,10 +123,10 @@ export default function ExplorePage() {
           <div className="flex items-center gap-2">
             <Link 
               href="/profile" 
-              className="mr-1 sm:mr-2 rounded-md p-1 hover:bg-muted transition-colors"
+              className="mr-1 sm:mr-2 rounded-md p-1 hover:bg-muted transition-all duration-200 hover:scale-110 hover:shadow-md"
               aria-label={tCommon("back")}
             >
-              <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+              <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-200 hover:scale-110" />
             </Link>
             <h1 className="text-lg sm:text-xl font-bold">{tExplore('title')}</h1>
           </div>
@@ -135,20 +135,20 @@ export default function ExplorePage() {
             <ThemeToggleSimple />
             <Link 
               href="/chat" 
-              className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 h-8 w-8 sm:h-9 sm:w-9 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground"
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-1 h-8 w-8 sm:h-9 sm:w-9 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground hover:scale-110 hover:shadow-lg"
               title={tCommon("chat")}
             >
-              <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4" />
+              <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4 transition-transform duration-200 hover:scale-110" />
             </Link>
             <Button 
               onClick={handleRefresh} 
               variant="outline" 
               disabled={isLoading} 
               size="icon" 
-              className="h-8 w-8 sm:h-9 sm:w-9"
+              className="h-8 w-8 sm:h-9 sm:w-9 transition-all duration-200 hover:scale-110 hover:shadow-lg disabled:hover:scale-100 disabled:hover:shadow-none"
               title={tCommon('refresh')}
             >
-              <RefreshCw className={`w-3 h-3 sm:w-4 sm:h-4 ${isLoading ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-200 hover:scale-110 ${isLoading ? 'animate-spin' : ''}`} />
             </Button>
           </div>
         </header>
