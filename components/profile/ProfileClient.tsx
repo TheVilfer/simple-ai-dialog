@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense } from 'react';
+
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import ProfileInfo from '@/components/profile/ProfileInfo';
 import { Skeleton } from '@/components/ui/skeleton';

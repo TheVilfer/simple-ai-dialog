@@ -1,11 +1,13 @@
 "use client";
 
-import { useRef, useEffect, ReactNode } from "react";
-import { useChat } from "@/hooks/useChat";
-import { ChatMessage } from "@/components/chat/ChatMessage";
 import { Bot } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
+import { useRef, useEffect, ReactNode } from "react";
+
+import { ChatMessage } from "@/components/chat/ChatMessage";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useChat } from "@/hooks/useChat";
+
 
 interface ChatListProps {
   emptyState?: ReactNode;

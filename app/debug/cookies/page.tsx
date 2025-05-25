@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { getCookie } from "cookies-next";
+import { useEffect, useState } from "react";
+
 
 export default function DebugCookies() {
   const [cookieData, setCookieData] = useState<Record<string, string>>({});
@@ -11,7 +12,9 @@ export default function DebugCookies() {
     // Get cookies from document
     const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
       const [name, value] = cookie.split("=");
-      acc[name] = value;
+      if (name && value) {
+        acc[name] = value;
+      }
       return acc;
     }, {} as Record<string, string>);
 
@@ -19,8 +22,12 @@ export default function DebugCookies() {
     const authToken = getCookie("auth_token");
     const userEmail = getCookie("user_email");
 
-    if (authToken) cookies["auth_token (getCookie)"] = String(authToken);
-    if (userEmail) cookies["user_email (getCookie)"] = String(userEmail);
+    if (authToken) {
+      cookies["auth_token (getCookie)"] = String(authToken);
+    }
+    if (userEmail) {
+      cookies["user_email (getCookie)"] = String(userEmail);
+    }
 
     setCookieData(cookies);
 

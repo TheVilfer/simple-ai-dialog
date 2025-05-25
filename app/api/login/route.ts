@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+
 import { 
   AUTH_COOKIE_NAME, 
   USER_COOKIE_NAME, 
@@ -8,14 +9,14 @@ import {
 } from '@/lib/auth';
 
 export async function POST(request: Request) {
-  console.log("[API] Login request received");
+  console.warn("[API] Login request received");
   
   try {
     // Try to parse the request body as JSON
     let body: AuthCredentials;
     try {
       body = await request.json();
-      console.log("[API] Login request body parsed:", { email: body.email });
+      console.warn("[API] Login request body parsed:", { email: body.email });
     } catch (parseError) {
       console.error('[API] JSON parse error:', parseError);
       return NextResponse.json(
@@ -26,7 +27,9 @@ export async function POST(request: Request) {
     
     // Email and password validation
     if (!body.email || !body.password) {
-      console.log("[API] Missing email or password");
+    {
+  }
+      console.warn("[API] Missing email or password");
       return NextResponse.json(
         { message: 'Email and password are required' },
         { status: 400 }
@@ -38,7 +41,7 @@ export async function POST(request: Request) {
     
     // Generate a token
     const token = generateToken('jwt');
-    console.log("[API] Generated token:", `${token.substring(0, 10)}...`);
+    console.warn("[API] Generated token:", `${token.substring(0, 10)}...`);
     
     // Create response data
     const responseData = {
@@ -56,13 +59,13 @@ export async function POST(request: Request) {
     response.cookies.set(USER_COOKIE_NAME, decodeURIComponent(body.email), cookieOptions);
     
     // Log the cookie operation
-    console.log("[API] Setting auth cookies with options:", {
+    console.warn("[API] Setting auth cookies with options:", {
       token: `${token.substring(0, 10)}...`,
       email: body.email,
       options: cookieOptions
     });
     
-    console.log("[API] Login response ready:", { status: 200 });
+    console.warn("[API] Login response ready:", { status: 200 });
     return response;
     
   } catch (error) {

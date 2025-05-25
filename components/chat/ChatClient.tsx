@@ -1,16 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ChatList } from "@/components/chat/ChatList";
-import { ChatInput } from "@/components/chat/ChatInput";
-import { Button } from "@/components/ui/button";
 import { PlusIcon, ArrowLeftIcon, ImageIcon } from "lucide-react";
-import { useChat } from "@/hooks/useChat";
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import Link from "next/link";
-import { ThemeToggleSimple } from "@/components/ui/theme-toggle";
-import { LanguageSwitcherSimple } from "@/components/ui/language-switcher";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import { ChatInput } from "@/components/chat/ChatInput";
+import { ChatList } from "@/components/chat/ChatList";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -19,6 +17,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { LanguageSwitcherSimple } from "@/components/ui/language-switcher";
+import { ThemeToggleSimple } from "@/components/ui/theme-toggle";
+import { useChat } from "@/hooks/useChat";
 
 export default function ChatClient() {
   const { clearMessages } = useChat();

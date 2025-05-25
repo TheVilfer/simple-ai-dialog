@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { QueryProvider } from "@/lib/providers/query-provider";
-import { AuthProvider } from "@/lib/providers/auth-provider";
-import { ThemeProvider } from "@/lib/providers/theme-provider";
-import { ToastProvider } from "@/components/ui/toast-provider";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
+
+import { ToastProvider } from "@/components/ui/toast-provider";
+import { AuthProvider } from "@/lib/providers/auth-provider";
+import { QueryProvider } from "@/lib/providers/query-provider";
+import { ThemeProvider } from "@/lib/providers/theme-provider";
+
 import "./globals.css";
 
 const geistSans = Geist({

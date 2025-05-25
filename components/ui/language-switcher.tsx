@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { Button } from "./button";
-import { useTranslations } from "next-intl";
 import { setCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useState, useEffect } from "react";
+
+
+import { Button } from "./button";
+
 
 export function LanguageSwitcher() {
   const [mounted, setMounted] = useState(false);
@@ -24,6 +27,8 @@ export function LanguageSwitcher() {
 
   // Avoid hydration mismatch
   if (!mounted) {
+    {
+  }
     return <Button variant="ghost" className="h-8 w-14 sm:h-9 sm:w-16 opacity-0" />;
   }
 
@@ -78,6 +83,8 @@ export function LanguageSwitcherSimple() {
 
   // Avoid hydration mismatch
   if (!mounted) {
+    {
+  }
     return <Button variant="ghost" className="h-8 w-12 sm:h-9 sm:w-16 opacity-0" />;
   }
 

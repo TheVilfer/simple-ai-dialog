@@ -1,9 +1,12 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { useRouter } from "next/navigation";
+
+
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { setCookie, deleteCookie } from 'cookies-next';
+import { useRouter } from "next/navigation";
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+
 import { type User, type AuthCredentials } from "../auth";
 
 // Define the shape of the Auth Context
@@ -57,15 +60,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Check authentication status on mount
   useEffect(() => {
-    console.log("[Auth] Initializing auth state");
+    console.warn("[Auth] Initializing auth state");
     
     // Check authentication by calling the ME endpoint
     const checkAuthStatus = async () => {
       try {
         const res = await fetch("/api/me");
         if (res.ok) {
+    {
+  }
           const data = await res.json();
-          console.log("[Auth] Successfully fetched user profile:", data);
+          console.warn("[Auth] Successfully fetched user profile:", data);
           
           // Set user state with the response data
           setUser({
@@ -74,7 +79,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             token: "http-only-token"
           });
         } else {
-          console.log("[Auth] No authenticated session found");
+          console.warn("[Auth] No authenticated session found");
         }
       } catch (error) {
         console.error("[Auth] Error checking auth status:", error);
@@ -97,7 +102,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Registration mutation
   const registerMutation = useMutation({
     mutationFn: async (credentials: AuthCredentials) => {
-      console.log("Sending registration request:", { email: credentials.email });
+      console.warn("Sending registration request:", { email: credentials.email });
       
       const response = await fetch("/api/register", {
         method: "POST",
@@ -108,7 +113,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         redirect: "manual",
       });
       
-      console.log("Registration response:", { 
+      console.warn("Registration response:", { 
         status: response.status, 
         statusText: response.statusText,
         type: response.type,
@@ -116,6 +121,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       });
 
       if (!response.ok) {
+    {
+  }
         try {
           const errorData = await response.json();
           throw new Error(errorData.message || "Registration failed");
@@ -131,7 +138,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     },
     onSuccess: (data) => {
-      console.log("Registration successful:", data);
+      console.warn("Registration successful:", data);
       
       // Update auth state
       setUser({
@@ -153,7 +160,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Login mutation
   const loginMutation = useMutation({
     mutationFn: async (credentials: AuthCredentials) => {
-      console.log("Sending login request:", { email: credentials.email });
+      console.warn("Sending login request:", { email: credentials.email });
       
       const response = await fetch("/api/login", {
         method: "POST",
@@ -164,7 +171,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         redirect: "manual",
       });
       
-      console.log("Login response:", { 
+      console.warn("Login response:", { 
         status: response.status, 
         statusText: response.statusText,
         type: response.type,
@@ -172,6 +179,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       });
 
       if (!response.ok) {
+    {
+  }
         try {
           const errorData = await response.json();
           throw new Error(errorData.message || "Login failed");
@@ -187,7 +196,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
     },
     onSuccess: (data) => {
-      console.log("Login successful:", data);
+      console.warn("Login successful:", data);
       
       // Update auth state
       setUser({
@@ -212,12 +221,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     queryKey: ["profile", user?.email],
     queryFn: async (): Promise<ProfileData> => {
       if (!user) {
+    {
+  }
         throw new Error("Not authenticated");
       }
 
       const response = await fetch("/api/me");
 
       if (!response.ok) {
+    {
+  }
         throw new Error("Failed to fetch profile");
       }
 
@@ -229,7 +242,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Logout function
   const logout = async () => {
     try {
-      console.log("[Auth] Logging out");
+      console.warn("[Auth] Logging out");
       
       // Call logout API to clear server-side cookies
       await fetch('/api/logout', { method: 'POST' });

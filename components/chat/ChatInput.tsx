@@ -1,21 +1,24 @@
 "use client";
 
-import { useState, FormEvent, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { SendIcon, CornerDownLeftIcon, HelpCircle } from "lucide-react";
-import { useChat } from "@/hooks/useChat";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
+import { useState, FormEvent, useRef, useEffect } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useChat } from "@/hooks/useChat";
+
+
 
 interface ChatInputProps {
   placeholder?: string;
-  customHandler?: (message: string) => Promise<void>;
+  customHandler?: ((message: string) => Promise<void>) | undefined;
   className?: string;
 }
 
@@ -33,6 +36,8 @@ export function ChatInput({
   // Auto-resize textarea based on content
   useEffect(() => {
     if (textareaRef.current) {
+    {
+  }
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 150)}px`;
     }
@@ -42,15 +47,21 @@ export function ChatInput({
     e.preventDefault();
     
     const trimmedMessage = message.trim();
-    if (!trimmedMessage || isLoading) return;
+    if (!trimmedMessage || isLoading) {
+    return;
+  }
     
     // Clear input
     setMessage("");
     if (textareaRef.current) {
+    {
+  }
       textareaRef.current.style.height = 'auto';
     }
     
     if (customHandler) {
+    {
+  }
       // Use custom handler if provided
       await customHandler(trimmedMessage);
     } else {
@@ -62,6 +73,8 @@ export function ChatInput({
   
   const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
+    {
+  }
       e.preventDefault();
       handleSubmit(e as unknown as FormEvent);
     }

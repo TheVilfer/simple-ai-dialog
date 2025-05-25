@@ -1,15 +1,19 @@
 'use client';
 
-import { useState } from 'react';
-import Image from 'next/image';
-import { Dialog, DialogTitle } from '@/components/ui/dialog';
+
+
+
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { X, Download, Heart, Calendar } from 'lucide-react';
-import { UnsplashImage } from '@/lib/types/unsplash';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogTitle } from '@/components/ui/dialog';
 import { useTheme } from '@/lib/providers/theme-provider';
+import { UnsplashImage } from '@/lib/types/unsplash';
 
 interface ImageModalProps {
   image: UnsplashImage | null;
@@ -26,6 +30,8 @@ export function ImageModal({ image, isOpen, onClose }: ImageModalProps) {
   // Helper function to get the resolved theme
   const getResolvedTheme = () => {
     if (theme === "system") {
+    {
+  }
       return typeof window !== 'undefined' && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
     return theme;
@@ -33,7 +39,9 @@ export function ImageModal({ image, isOpen, onClose }: ImageModalProps) {
 
   const resolvedTheme = getResolvedTheme();
 
-  if (!image) return null;
+  if (!image) {
+    return null;
+  }
 
   const handleDownload = async () => {
     try {
@@ -185,9 +193,9 @@ export function ImageModal({ image, isOpen, onClose }: ImageModalProps) {
                   {/* Tags */}
                   {image.tags && image.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {image.tags.slice(0, 5).map((tag, index) => (
+                      {image.tags.slice(0, 5).map((tag) => (
                         <Badge 
-                          key={index} 
+                          key={`${image.id}-${tag.title}`} 
                           variant="secondary" 
                           className={`border-0 cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-md ${
                             resolvedTheme === 'light' 

@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState, Suspense } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { useAuth } from "@/lib/providers/auth-provider";
+import { useEffect, useState, Suspense } from "react";
+
 import { LoadingSkeleton } from "@/components/ui/loading-skeleton";
+import { useAuth } from "@/lib/providers/auth-provider";
 
 // Create a separate component for navigation handling
 function NavigationHandler({ children }: { children: React.ReactNode }) {
@@ -15,17 +16,17 @@ function NavigationHandler({ children }: { children: React.ReactNode }) {
   
   useEffect(() => {
     // Don't do anything until we know the authentication state
-    if (isLoading) return;
+    if (isLoading) {return;}
     
     // If authenticated, render the children
     if (isAuthenticated) {
-      console.log("[ProtectedRoute] User is authenticated");
+      console.warn("[ProtectedRoute] User is authenticated");
       setIsChecking(false);
       return;
     }
     
     // If not authenticated, redirect to login
-    console.log("[ProtectedRoute] User is not authenticated, redirecting to login");
+    console.warn("[ProtectedRoute] User is not authenticated, redirecting to login");
     const from = searchParams.get('from') || pathname;
     router.push(`/auth/login?from=${encodeURIComponent(from)}`);
   }, [isLoading, isAuthenticated, router, pathname, searchParams]);

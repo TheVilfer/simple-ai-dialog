@@ -1,9 +1,11 @@
 "use client";
 
-import RegisterForm from '@/components/auth/RegisterForm';
-import { ThemeToggleSimple } from '@/components/ui/theme-toggle';
-import { LanguageSwitcherSimple } from '@/components/ui/language-switcher';
 import { useTranslations } from 'next-intl';
+
+import RegisterForm from '@/components/auth/RegisterForm';
+import { LanguageSwitcherSimple } from '@/components/ui/language-switcher';
+import { ThemeToggleSimple } from '@/components/ui/theme-toggle';
+
 
 export default function RegisterClient() {
   const t = useTranslations('auth');

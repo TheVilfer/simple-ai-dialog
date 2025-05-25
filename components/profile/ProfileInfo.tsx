@@ -1,15 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/useAuth";
-import { formatDate } from "@/lib/utils";
-import Link from "next/link";
 import { MessageSquare, ImageIcon } from "lucide-react";
-import { ThemeToggleSimple } from "@/components/ui/theme-toggle";
-import { LanguageSwitcherSimple } from "@/components/ui/language-switcher";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -18,6 +14,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { LanguageSwitcherSimple } from "@/components/ui/language-switcher";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ThemeToggleSimple } from "@/components/ui/theme-toggle";
+import { useAuth } from "@/hooks/useAuth";
+import { formatDate } from "@/lib/utils";
+
+
+
 
 export default function ProfileInfo() {
   const { profile, isLoadingProfile, profileError, user, logout } = useAuth();
@@ -27,7 +31,9 @@ export default function ProfileInfo() {
 
   // Function to decode URL-encoded email
   const decodeEmail = (email: string | undefined) => {
-    if (!email) return '';
+    if (!email) {
+    return '';
+  }
     try {
       return decodeURIComponent(email);
     } catch (e) {
@@ -42,6 +48,8 @@ export default function ProfileInfo() {
   };
 
   if (isLoadingProfile) {
+    {
+  }
     return (
       <div className="space-y-6 sm:space-y-8">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0">
@@ -83,6 +91,8 @@ export default function ProfileInfo() {
   }
 
   if (profileError) {
+    {
+  }
     return (
       <div className="text-center py-6 sm:py-10">
         <div className="bg-destructive/15 p-3 sm:p-4 rounded-md mb-3 sm:mb-4 max-w-md mx-auto">
@@ -149,8 +159,8 @@ export default function ProfileInfo() {
           
           {profile?.subscriptions && profile.subscriptions.length > 0 ? (
             <ul className="space-y-1 sm:space-y-2">
-              {profile.subscriptions.map((subscription, index) => (
-                <li key={index} className="flex items-center gap-x-2 text-sm sm:text-base">
+              {profile.subscriptions.map((subscription) => (
+                <li key={`subscription-${subscription}`} className="flex items-center gap-x-2 text-sm sm:text-base">
                   <div className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-primary"></div>
                   <span>{subscription}</span>
                 </li>

@@ -1,5 +1,7 @@
-import ChatClient from '@/components/chat/ChatClient';
 import { Metadata } from 'next';
+
+import ChatClient from '@/components/chat/ChatClient';
+
 
 export const metadata: Metadata = {
   title: 'Chat',

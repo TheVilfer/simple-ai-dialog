@@ -1,8 +1,11 @@
 "use client";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
+
 import { useRouter } from "next/navigation";
+
 import { useState, useEffect } from "react";
+
 import { setCookie, deleteCookie } from 'cookies-next';
 
 interface User {
@@ -36,7 +39,7 @@ export const useAuth = () => {
 
   // Initialize user state when the app is mounted
   useEffect(() => {
-    console.log("[Auth] Initializing auth from cookies");
+    console.warn("[Auth] Initializing auth from cookies");
     
     // For client-side auth state, we'll fetch the user profile
     // to check if we're already authenticated (via HttpOnly cookies)
@@ -44,8 +47,10 @@ export const useAuth = () => {
       try {
         const res = await fetch("/api/me");
         if (res.ok) {
+    {
+  }
           const data = await res.json();
-          console.log("[Auth] Successfully fetched user profile:", data);
+          console.warn("[Auth] Successfully fetched user profile:", data);
           
           // We're authenticated, set the user state with decoded email
           setUser({
@@ -55,7 +60,7 @@ export const useAuth = () => {
             token: "http-only-token"  
           });
         } else {
-          console.log("[Auth] No authenticated session found");
+          console.warn("[Auth] No authenticated session found");
         }
       } catch (error) {
         console.error("[Auth] Error checking auth status:", error);
@@ -73,12 +78,12 @@ export const useAuth = () => {
     // Client-side cookies with cookies-next for state display only
     // Make sure to decode email before saving
     setCookie('user_email_client', decodeURIComponent(userData.email), cookieOptions);
-    console.log("[Auth] Client cookies saved");
+    console.warn("[Auth] Client cookies saved");
   };
 
   const registerMutation = useMutation({
     mutationFn: async (credentials: AuthCredentials) => {
-      console.log("Sending registration request:", { email: credentials.email });
+      console.warn("Sending registration request:", { email: credentials.email });
       
       const response = await fetch("/api/register", {
         method: "POST",
@@ -91,7 +96,7 @@ export const useAuth = () => {
       });
 
       // Log response for debugging
-      console.log("Registration response:", { 
+      console.warn("Registration response:", { 
         status: response.status, 
         statusText: response.statusText,
         type: response.type,
@@ -100,6 +105,8 @@ export const useAuth = () => {
 
       let responseData;
       if (!response.ok) {
+    {
+  }
         // Try to parse error response as JSON, fallback to status text
         try {
           responseData = await response.json();
@@ -119,7 +126,7 @@ export const useAuth = () => {
       }
     },
     onSuccess: (data) => {
-      console.log("Registration successful:", data);
+      console.warn("Registration successful:", data);
       const userData = {
         email: data.email,
         token: data.token,
@@ -135,7 +142,7 @@ export const useAuth = () => {
 
   const loginMutation = useMutation({
     mutationFn: async (credentials: AuthCredentials) => {
-      console.log("Sending login request:", { email: credentials.email });
+      console.warn("Sending login request:", { email: credentials.email });
       
       const response = await fetch("/api/login", {
         method: "POST",
@@ -148,7 +155,7 @@ export const useAuth = () => {
       });
 
       // Log response for debugging
-      console.log("Login response:", { 
+      console.warn("Login response:", { 
         status: response.status, 
         statusText: response.statusText,
         type: response.type,
@@ -157,6 +164,8 @@ export const useAuth = () => {
 
       let responseData;
       if (!response.ok) {
+    {
+  }
         // Try to parse error response as JSON, fallback to status text
         try {
           responseData = await response.json();
@@ -176,7 +185,7 @@ export const useAuth = () => {
       }
     },
     onSuccess: (data) => {
-      console.log("Login successful:", data);
+      console.warn("Login successful:", data);
       const userData = {
         email: decodeURIComponent(data.email),
         token: data.token,
@@ -197,6 +206,8 @@ export const useAuth = () => {
     queryKey: ["profile", user?.token],
     queryFn: async (): Promise<ProfileData> => {
       if (!user?.token) {
+    {
+  }
         throw new Error("Not authenticated");
       }
 
@@ -207,6 +218,8 @@ export const useAuth = () => {
       });
 
       if (!response.ok) {
+    {
+  }
         throw new Error("Failed to fetch profile");
       }
 

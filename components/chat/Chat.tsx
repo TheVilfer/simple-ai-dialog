@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, ReactNode } from "react";
-import { ChatList } from "@/components/chat/ChatList";
-import { ChatInput } from "@/components/chat/ChatInput";
-import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
-import { useChat } from "@/hooks/useChat";
 import { useTranslations } from "next-intl";
+import { useEffect, ReactNode } from "react";
+
+import { ChatInput } from "@/components/chat/ChatInput";
+import { ChatList } from "@/components/chat/ChatList";
+import { Button } from "@/components/ui/button";
+import { useChat } from "@/hooks/useChat";
+
 
 interface ChatProps {
   title?: string;
@@ -29,6 +31,8 @@ export function Chat({
   const handleNewChat = () => {
     clearMessages();
     if (onNewChat) {
+    {
+  }
       onNewChat();
     }
   };
@@ -36,6 +40,8 @@ export function Chat({
   // Reset chat messages when component mounts if clearOnMount is true
   useEffect(() => {
     if (clearOnMount) {
+    {
+  }
       clearMessages();
     }
   }, [clearMessages, clearOnMount]);

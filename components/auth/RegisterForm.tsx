@@ -1,16 +1,17 @@
 "use client";
 
-import { useState, Suspense } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { FormError } from "@/components/ui/form-error";
-import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useState, Suspense } from "react";
+
+import { Button } from "@/components/ui/button";
+import { FormError } from "@/components/ui/form-error";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { LoadingSkeleton } from "@/components/ui/loading-skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useAuth } from "@/hooks/useAuth";
 
 // Create a loading fallback
 const RegisterFormSkeleton = () => (

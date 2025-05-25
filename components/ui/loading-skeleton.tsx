@@ -13,6 +13,8 @@ export function LoadingSkeleton({
   className,
 }: LoadingSkeletonProps) {
   if (variant === "page") {
+    {
+  }
     return (
       <div className={cn("flex min-h-screen items-center justify-center", className)}>
         <div className="text-center">
@@ -27,6 +29,8 @@ export function LoadingSkeleton({
   }
 
   if (variant === "button") {
+    {
+  }
     const width = size === "sm" ? "w-16" : size === "lg" ? "w-32" : "w-24";
     return (
       <div className={cn("flex justify-center items-center gap-2", className)}>
@@ -36,6 +40,8 @@ export function LoadingSkeleton({
   }
 
   if (variant === "card") {
+    {
+  }
     return (
       <div className={cn("rounded-lg border border-border p-6 bg-card", className)}>
         <Skeleton className="h-6 w-32 mb-4" />

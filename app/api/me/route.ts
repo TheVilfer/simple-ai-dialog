@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
+
 import { getUserFromRequest } from '@/lib/auth';
 
 export async function GET(request: Request) {
-  console.log("[API] /me endpoint called");
+  console.warn("[API] /me endpoint called");
 
   try {
     // Get the user from the request
@@ -10,7 +11,9 @@ export async function GET(request: Request) {
     
     // If no user is found, return 401
     if (!user) {
-      console.log("[API] Authentication failed");
+    {
+  }
+      console.warn("[API] Authentication failed");
       return NextResponse.json(
         { message: 'Authentication required' },
         { status: 401 }
@@ -18,7 +21,7 @@ export async function GET(request: Request) {
     }
     
     // Log the authenticated user
-    console.log("[API] Authenticated user:", { email: user.email });
+    console.warn("[API] Authenticated user:", { email: user.email });
 
     // In a real application, you would fetch more user data from a database
     // For demo purposes, we'll just return mock data

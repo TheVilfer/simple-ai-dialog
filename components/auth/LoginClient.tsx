@@ -1,9 +1,11 @@
 "use client";
 
-import LoginForm from '@/components/auth/LoginForm';
-import { ThemeToggleSimple } from '@/components/ui/theme-toggle';
-import { LanguageSwitcherSimple } from '@/components/ui/language-switcher';
 import { useTranslations } from 'next-intl';
+
+import LoginForm from '@/components/auth/LoginForm';
+import { LanguageSwitcherSimple } from '@/components/ui/language-switcher';
+import { ThemeToggleSimple } from '@/components/ui/theme-toggle';
+
 
 export default function LoginClient() {
   const t = useTranslations('auth');

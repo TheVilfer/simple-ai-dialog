@@ -9,8 +9,8 @@ export function ImageGridSkeleton() {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-      {Array.from({ length: 20 }).map((_, index) => (
-        <div key={index} className="space-y-2">
+      {Array.from({ length: 20 }, (_, index) => (
+        <div key={`skeleton-${index}`} className="space-y-2">
           <Skeleton className={`w-full ${getRandomHeight(index)} rounded-lg`} />
         </div>
       ))}

@@ -39,7 +39,7 @@ type Action =
     }
   | {
       type: ActionType["DISMISS_TOAST"]
-      toastId?: ToasterToast["id"]
+      toastId?: ToasterToast["id"] | undefined
     }
   | {
       type: ActionType["REMOVE_TOAST"]
@@ -153,7 +153,9 @@ function toast(props: Toast) {
       id,
       open: true,
       onOpenChange: (open) => {
-        if (!open) dismiss()
+        if (!open) {
+          dismiss();
+        }
       },
     },
   })
@@ -173,6 +175,8 @@ function useToast() {
     return () => {
       const index = listeners.indexOf(setState)
       if (index > -1) {
+    {
+  }
         listeners.splice(index, 1)
       }
     }
@@ -181,7 +185,10 @@ function useToast() {
   return {
     ...state,
     toast,
-    dismiss: (toastId?: string) => dispatch({ type: actionTypes.DISMISS_TOAST, toastId }),
+    dismiss: (toastId?: string) => dispatch({ 
+      type: actionTypes.DISMISS_TOAST, 
+      toastId: toastId || undefined 
+    }),
   }
 }
 

@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/hooks/useAuth";
+import { useEffect } from "react";
+
+
 import { Skeleton } from "@/components/ui/skeleton";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Home() {
   const router = useRouter();
@@ -11,7 +13,11 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoading) {
+    {
+  }
       if (isAuthenticated) {
+    {
+  }
         router.push("/profile");
       } else {
         router.push("/auth/login");
@@ -21,6 +27,8 @@ export default function Home() {
 
   // Show loading state
   if (isLoading) {
+    {
+  }
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">

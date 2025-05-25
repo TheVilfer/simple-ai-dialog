@@ -1,5 +1,7 @@
-import RegisterClient from '@/components/auth/RegisterClient';
 import { Metadata } from 'next';
+
+import RegisterClient from '@/components/auth/RegisterClient';
+
 
 export const metadata: Metadata = {
   title: 'Register',

@@ -1,17 +1,21 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { Message } from "@/hooks/useChat";
-import { formatDate } from "@/lib/utils";
 import { User, Bot, Copy, Check } from "lucide-react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
-import rehypeHighlight from "rehype-highlight";
-import { useState } from "react";
-import { toast } from "@/hooks/useToast";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
+
+import { toast } from "@/hooks/useToast";
+import { cn } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
+import type { Message } from "@/types/chat";
+
+
+
 
 interface ChatMessageProps {
   message: Message;
@@ -115,6 +119,8 @@ export function ChatMessage({ message }: ChatMessageProps) {
                   ),
                   img: ({ src, alt }) => {
                     if (!src || typeof src !== 'string') {
+    {
+  }
                       return (
                         <span className="text-muted-foreground text-[10px]">
                           [Image cannot be displayed]
@@ -125,6 +131,8 @@ export function ChatMessage({ message }: ChatMessageProps) {
                     try {
                       const url = new URL(src);
                       if (url.protocol === 'http:' || url.protocol === 'https:') {
+    {
+  }
                         return (
                           <div className="relative max-w-full h-auto my-2 rounded-md overflow-hidden">
                             <Image
@@ -197,7 +205,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
           "text-[8px] xs:text-[9px] sm:text-[10px] text-muted-foreground",
           isUser ? "px-1 sm:px-1.5 mt-0.5 sm:mt-1" : "px-1.5 sm:px-2 mt-1 sm:mt-1.5"
         )}>
-          {formatDate(message.timestamp)}
+          {formatDate(new Date(message.timestamp))}
         </span>
       </div>
       

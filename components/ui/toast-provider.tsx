@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { Toaster } from "@/components/ui/toaster";
 
 export function ToastProvider() {
@@ -11,6 +12,8 @@ export function ToastProvider() {
   }, []);
 
   if (!isMounted) {
+    {
+  }
     return null;
   }
 
