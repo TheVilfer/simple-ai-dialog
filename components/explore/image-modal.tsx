@@ -159,7 +159,9 @@ export function ImageModal({ image, isOpen, onClose }: ImageModalProps) {
                     href={`https://unsplash.com/@${image.user.username}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 mb-4 group/user cursor-pointer hover:bg-black/10 hover:bg-white/10 rounded-lg p-2 -m-2 transition-all duration-200 max-w-fit"
+                    className={`inline-flex items-center gap-3 mb-4 group/user cursor-pointer rounded-lg p-2 -m-2 transition-all duration-200 max-w-fit ${
+                      resolvedTheme === 'light' ? 'hover:bg-black/10' : 'hover:bg-white/10'
+                    }`}
                   >
                     <div className="w-10 h-10 rounded-full overflow-hidden transition-transform duration-200 group-hover/user:scale-110 group-hover/user:shadow-lg flex-shrink-0">
                       <Image
